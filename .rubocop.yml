@@ -1,0 +1,105 @@
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: disable
+
+Style/RedundantBegin:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Style/TernaryParentheses:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Style/RedundantAssignment:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Style/SingleArgumentDig:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
+
+Lint/ToJSON:
+  Enabled: false
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+Lint/SuppressedException:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
+
+Layout/ArgumentAlignment:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/CaseLikeIf:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
