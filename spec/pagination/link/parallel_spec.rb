@@ -8,7 +8,7 @@ describe DHS::Record do
   end
 
   let(:data) do
-    DHS::Data.new(data_hash, nil, Record)
+    DHS::Data.new(data_hash, nil, DHS::Record)
   end
 
   let(:pagination) { DHS::Pagination::Link.new(data) }

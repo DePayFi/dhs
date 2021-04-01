@@ -7,7 +7,7 @@ describe DHS::Record do
   let(:data_hash) { { items: 98.times.map { { foo: 'bar' } }, total: 98, offset: offset, limit: 10 } }
 
   let(:data) do
-    DHS::Data.new(data_hash, nil, Record)
+    DHS::Data.new(data_hash, nil, DHS::Record)
   end
 
   let(:pagination) { DHS::Pagination::Offset.new(data) }
