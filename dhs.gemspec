@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 3.0.0'
 
   s.add_dependency 'activemodel'
-  s.add_dependency 'activesupport', '>= 5'
+  s.add_dependency 'activesupport', '>= 6'
   s.add_dependency 'dhc'
   s.add_dependency 'local_uri'
 
@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'json', '>=  1.8.2'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'pry-byebug'
-  s.add_development_dependency 'rails', '>= 5.1'
+  s.add_development_dependency 'rails', '>= 6'
   s.add_development_dependency 'rollbar', '<= 2.24.0'
   s.add_development_dependency 'rspec-rails', '>= 3.7.0'
   s.add_development_dependency 'rubocop'
