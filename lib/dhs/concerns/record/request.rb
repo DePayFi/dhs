@@ -501,7 +501,7 @@ class DHS::Record
         interceptors = options[:interceptors] || DHC.config.interceptors
         if interceptors.include?(dependecy)
           # Ensure interceptor is prepend
-          interceptors = interceptors.unshift(interceptor)
+          interceptors.unshift(interceptor)
           options[:interceptors] = interceptors
         else
           warn(warning)

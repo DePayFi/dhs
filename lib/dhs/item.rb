@@ -40,7 +40,7 @@ class DHS::Item < DHS::Proxy
 
   protected
 
-  def method_missing(name, *args, **keyword_args, &_block)
+  def method_missing(name, *args, **_keyword_args, &_block)
     return set(name, args) if name.to_s[/=$/]
     get(name, *args)
   end

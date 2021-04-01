@@ -19,6 +19,7 @@ class DHS::Proxy
 
   # prevent clashing with attributes of underlying data
   attr_accessor :_data, :_loaded
+
   delegate :_record, :becomes, to: :_data, allow_nil: true
 
   def initialize(data)

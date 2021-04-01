@@ -13,6 +13,7 @@ class DHS::Collection < DHS::Proxy
       include Enumerable
 
       attr_accessor :raw
+
       delegate :length, :size, :first, :last, :sample, :[], :present?, :blank?, :empty?,
                :<<, :push, :insert, to: :raw
 

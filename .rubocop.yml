@@ -133,3 +133,54 @@ Style/HashTransformValues:
 
 Layout/ElseAlignment:
   Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/HashAsLastArrayItem:
+  Enabled: false
+
+Style/RedundantRegexpEscape:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Enabled: false
+
+Layout/EndAlignment:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: false
+
+Lint/UselessMethodDefinition:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
+
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+
+Lint/SafeNavigationWithEmpty:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Lint/RedundantSafeNavigation:
+  Enabled: false
+
+Style/ExplicitBlockArgument:
+  Enabled: false

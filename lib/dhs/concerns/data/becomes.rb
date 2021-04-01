@@ -8,7 +8,7 @@ class DHS::Data
     extend ActiveSupport::Concern
 
     def becomes(klass, options = {})
-      return self if self.class == klass && !is_a?(DHS::Data)
+      return self if self.instance_of?(klass) && !is_a?(DHS::Data)
       data = DHS::Data.new(_raw, _parent, klass)
       data.errors = options[:errors] if options[:errors]
       data.warnings = options[:warnings] if options[:warnings]

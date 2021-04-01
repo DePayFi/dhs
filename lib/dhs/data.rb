@@ -124,7 +124,7 @@ class DHS::Data
     loop do
       root = root._parent
       root_item = root if root && root._proxy.is_a?(DHS::Item)
-      unless (root && root._parent)
+      unless root&._parent
         break
       end
     end
