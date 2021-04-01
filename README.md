@@ -39,11 +39,11 @@ record.review # "Lunch was great
 
 ## Installation/Startup checklist
 
-- [ ] Install DHS gem, preferably via `Gemfile`
-- [ ] Configure [DHC](https://github.com/DePayFi/dhc) via an `config/initializers/dhc.rb` (See: https://github.com/DePayFi/dhc#configuration)
-- [ ] Add `DHC::Caching` to `DHC.config.interceptors` to facilitate DHS' [Request Cycle Cache](#request-cycle-cache)
-- [ ] Store all DHS::Records in `app/models` for autoload/preload reasons
-- [ ] Request data from services via `DHS` from within your rails controllers
+- [x] Install DHS gem, preferably via `Gemfile`
+- [x] Configure [DHC](https://github.com/DePayFi/dhc) via an `config/initializers/dhc.rb` (See: https://github.com/DePayFi/dhc#configuration)
+- [x] Add `DHC::Caching` to `DHC.config.interceptors` to facilitate DHS' [Request Cycle Cache](#request-cycle-cache)
+- [x] Store all DHS::Records in `app/models` for autoload/preload reasons
+- [x] Request data from services via `DHS` from within your rails controllers
 
 ## Record
 
