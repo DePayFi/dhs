@@ -15,7 +15,7 @@ describe DHS::Item do
 
   context 'create sub-resource' do
     let!(:create_review_request) do
-      stub_request(:post, "http://datastore/v2/feedbacks/1/reviews")
+      stub_request(:post, 'http://datastore/v2/feedbacks/1/reviews')
         .to_return(body: {
           href: 'http://datastore/v2/feedbacks/1/reviews/1',
           title: 'Simply awesome'
@@ -31,7 +31,7 @@ describe DHS::Item do
       end
 
       before do
-        stub_request(:get, "http://datastore/v2/feedbacks/1/reviews")
+        stub_request(:get, 'http://datastore/v2/feedbacks/1/reviews')
           .to_return(body: {
             href: 'http://datastore/v2/feedbacks/1/reviews',
             title: 'Simply awesome'
@@ -40,7 +40,7 @@ describe DHS::Item do
 
       context 'without the object' do
         before do
-          stub_request(:get, "http://datastore/v2/feedbacks/1")
+          stub_request(:get, 'http://datastore/v2/feedbacks/1')
             .to_return(body: {
               review: {
                 href: 'http://datastore/v2/feedbacks/1/reviews'
@@ -59,7 +59,7 @@ describe DHS::Item do
 
       context 'with existing item' do
         before do
-          stub_request(:get, "http://datastore/v2/feedbacks/1")
+          stub_request(:get, 'http://datastore/v2/feedbacks/1')
             .to_return(body: {
               review: {
                 href: 'http://datastore/v2/feedbacks/1/reviews',
@@ -84,7 +84,7 @@ describe DHS::Item do
       end
 
       before do
-        stub_request(:get, "http://datastore/v2/feedbacks/1/reviews")
+        stub_request(:get, 'http://datastore/v2/feedbacks/1/reviews')
           .to_return(body: {
             items: [{
               href: 'http://datastore/v2/feedbacks/1/reviews/1',
@@ -95,7 +95,7 @@ describe DHS::Item do
 
       context 'when expanded' do
         before do
-          stub_request(:get, "http://datastore/v2/feedbacks/1")
+          stub_request(:get, 'http://datastore/v2/feedbacks/1')
             .to_return(body: {
               reviews: {
                 href: 'http://datastore/v2/feedbacks/1/reviews',
@@ -117,7 +117,7 @@ describe DHS::Item do
 
       context 'when not expanded' do
         before do
-          stub_request(:get, "http://datastore/v2/feedbacks/1")
+          stub_request(:get, 'http://datastore/v2/feedbacks/1')
             .to_return(body: {
               reviews: {
                 href: 'http://datastore/v2/feedbacks/1/reviews'
@@ -140,7 +140,7 @@ describe DHS::Item do
 
   context 'error messages' do
     let!(:create_review_request) do
-      stub_request(:post, "http://datastore/v2/feedbacks/1/reviews")
+      stub_request(:post, 'http://datastore/v2/feedbacks/1/reviews')
         .to_return(
           status: 400,
           body: {
@@ -163,7 +163,7 @@ describe DHS::Item do
     end
 
     before do
-      stub_request(:get, "http://datastore/v2/feedbacks/1")
+      stub_request(:get, 'http://datastore/v2/feedbacks/1')
         .to_return(body: {
           review: {
             href: 'http://datastore/v2/feedbacks/1/reviews'

@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe DHS::Record do
-
   context 'options' do
     before do
       class Record < DHS::Record

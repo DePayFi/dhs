@@ -11,12 +11,12 @@ describe DHS::Record do
 
   context 'find in parallel' do
     before do
-      stub_request(:get, "http://datastore/records/1").to_return(status: 200, body: { id: 1 }.to_json)
-      stub_request(:get, "http://datastore/records/3").to_return(status: 200, body: { id: 3 }.to_json)
+      stub_request(:get, 'http://datastore/records/1').to_return(status: 200, body: { id: 1 }.to_json)
+      stub_request(:get, 'http://datastore/records/3').to_return(status: 200, body: { id: 3 }.to_json)
     end
 
     it 'finds records in parallel' do
-      stub_request(:get, "http://datastore/records/2").to_return(status: 200, body: { id: 2 }.to_json)
+      stub_request(:get, 'http://datastore/records/2').to_return(status: 200, body: { id: 2 }.to_json)
       allow(Record).to receive(:request).and_call_original
       data = Record.find([1, 2, 3])
       expect(Record).to have_received(:request).once
@@ -26,12 +26,12 @@ describe DHS::Record do
     end
 
     it 'raises an exeption if one of the parallel request fails' do
-      stub_request(:get, "http://datastore/records/2").to_return(status: 401)
+      stub_request(:get, 'http://datastore/records/2').to_return(status: 401)
       expect(-> { Record.find([1, 2, 3]) }).to raise_error(DHC::Unauthorized)
     end
 
     it 'applies error handlers from the chain and returns whatever the error handler returns' do
-      stub_request(:get, "http://datastore/records/2").to_return(status: 401)
+      stub_request(:get, 'http://datastore/records/2').to_return(status: 401)
       data = Record
         .rescue(DHC::Unauthorized, ->(_response) { Record.new(name: 'unknown') })
         .find(1, 2, 3)
@@ -49,9 +49,9 @@ describe DHS::Record do
         end
       end
 
-      stub_request(:get, "http://datastore/records/1").to_return(status: 200, body: { id: 1 }.to_json)
-      stub_request(:get, "http://datastore/records/2").to_return(status: 200, body: { id: 2 }.to_json)
-      stub_request(:get, "http://datastore/records/3").to_return(status: 200, body: { id: 3 }.to_json)
+      stub_request(:get, 'http://datastore/records/1').to_return(status: 200, body: { id: 1 }.to_json)
+      stub_request(:get, 'http://datastore/records/2').to_return(status: 200, body: { id: 2 }.to_json)
+      stub_request(:get, 'http://datastore/records/3').to_return(status: 200, body: { id: 3 }.to_json)
     end
 
     it 'finds single record in parallel' do

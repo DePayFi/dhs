@@ -2,7 +2,7 @@
 
 module DHS
   class Railtie < Rails::Railtie
-    initializer "dhs.hook_into_controller_initialization" do
+    initializer 'dhs.hook_into_controller_initialization' do
       class ActionController::Base
 
         def initialize

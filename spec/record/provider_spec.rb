@@ -4,7 +4,6 @@ require 'rails_helper'
 
 describe DHS::Record do
   context 'provider' do
-
     before do
       module Provider
         class BaseRecord < DHS::Record
@@ -20,10 +19,10 @@ describe DHS::Record do
         endpoint 'http://other_provider/records'
       end
 
-      stub_request(:get, "http://provider/records?id=1&api_key=123")
+      stub_request(:get, 'http://provider/records?id=1&api_key=123')
         .to_return(body: { name: 'Steve' }.to_json)
 
-      stub_request(:get, "http://other_provider/records?id=1")
+      stub_request(:get, 'http://other_provider/records?id=1')
         .to_return(body: { name: 'Not Steve' }.to_json)
     end
 

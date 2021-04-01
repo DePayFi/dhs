@@ -31,8 +31,8 @@ describe DHS::Record do
     end
 
     it 'also works when there is no total in the stubbing' do
-      stub_request(:get, "http://depay.fi/v2/feedbacks?limit=100").to_return(body: { items: (1..100).to_a }.to_json)
-      stub_request(:get, "http://depay.fi/v2/feedbacks?limit=100&offset=100").to_return(body: { items: [] }.to_json)
+      stub_request(:get, 'http://depay.fi/v2/feedbacks?limit=100').to_return(body: { items: (1..100).to_a }.to_json)
+      stub_request(:get, 'http://depay.fi/v2/feedbacks?limit=100&offset=100').to_return(body: { items: [] }.to_json)
       all = Record.all
       expect(all).to be_kind_of Record
       expect(all._proxy).to be_kind_of DHS::Collection
@@ -40,8 +40,8 @@ describe DHS::Record do
     end
 
     it 'also works when there is no key "items" in the stubbing' do
-      stub_request(:get, "http://depay.fi/v2/feedbacks?limit=100").to_return(body: (1..100).to_a.to_json)
-      stub_request(:get, "http://depay.fi/v2/feedbacks?limit=100&offset=100").to_return(body: [].to_json)
+      stub_request(:get, 'http://depay.fi/v2/feedbacks?limit=100').to_return(body: (1..100).to_a.to_json)
+      stub_request(:get, 'http://depay.fi/v2/feedbacks?limit=100&offset=100').to_return(body: [].to_json)
       all = Record.all
       expect(all).to be_kind_of Record
       expect(all._proxy).to be_kind_of DHS::Collection

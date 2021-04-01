@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe DHS::Item do
-
   before do
     class Presence < DHS::Record
       endpoint 'http://opm/presence'
@@ -20,7 +19,7 @@ describe DHS::Item do
   end
 
   it 'provides warnings together with validation errors' do
-    stub_request(:post, "http://opm/presence?synchronize=false")
+    stub_request(:post, 'http://opm/presence?synchronize=false')
       .to_return(
         body: {
           field_warnings: [{

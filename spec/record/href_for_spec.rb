@@ -11,7 +11,6 @@ describe DHS::Record do
   end
 
   context 'href_for' do
-
     it 'injects variables and returns href' do
       expect(Record.href_for(1)).to eq 'http://datastore/records/1'
       expect(Record.href_for('vmasd241')).to eq 'http://datastore/records/vmasd241'

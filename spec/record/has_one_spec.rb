@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe DHS::Record do
-
   let(:transaction) { Transaction.find(1) }
   let(:user) { transaction.user }
 
@@ -51,7 +50,6 @@ describe DHS::Record do
   end
 
   context 'custom class_name' do
-
     before do
       class Transaction < DHS::Record
         endpoint 'http://myservice/transactions'
@@ -93,14 +91,14 @@ describe DHS::Record do
         endpoint 'http://categories/categories/{id}'
       end
 
-      stub_request(:get, "http://places/places/1")
+      stub_request(:get, 'http://places/places/1')
         .to_return(body: {
           category: {
             href: 'https://categories/categories/1'
           }
         }.to_json)
 
-      stub_request(:get, "https://categories/categories/1")
+      stub_request(:get, 'https://categories/categories/1')
         .to_return(body: {
           href: 'https://categories/categories/1',
           category_name: 'Pizza'

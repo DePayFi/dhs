@@ -45,7 +45,7 @@ describe DHS::Collection do
     end
 
     it 'passes options to the requests made' do
-      request = stub_request(:get, "http://depay.fi/v2/feedbacks?limit=100&offset=1")
+      request = stub_request(:get, 'http://depay.fi/v2/feedbacks?limit=100&offset=1')
         .with(headers: { 'Authorization' => 'Bearer 123' })
         .to_return(body: {
           items: []

@@ -36,7 +36,7 @@ describe DHS::Record do
     #
 
     let!(:contracts_request) do
-      stub_request(:get, "http://datastore/customers/1/contracts?limit=100")
+      stub_request(:get, 'http://datastore/customers/1/contracts?limit=100')
         .to_return(
           body: {
             items: 10.times.map do
@@ -84,7 +84,7 @@ describe DHS::Record do
     #
 
     let!(:products_request) do
-      stub_request(:get, "http://datastore/products?limit=100")
+      stub_request(:get, 'http://datastore/products?limit=100')
         .to_return(
           body: {
             items: 10.times.map do
@@ -197,7 +197,7 @@ describe DHS::Record do
       end
 
       let!(:contracts_request) do
-        stub_request(:get, "http://datastore/customers/1/contracts?limit=100")
+        stub_request(:get, 'http://datastore/customers/1/contracts?limit=100')
           .to_return(
             body: {
               items: 10.times.map do
@@ -214,21 +214,21 @@ describe DHS::Record do
 
       it 'overwrites existing pagination paramters if they are already contained in a string' do
         expect(DHC).to receive(:request)
-          .with(url: "http://datastore/customers/1").and_call_original
+          .with(url: 'http://datastore/customers/1').and_call_original
 
         expect(DHC).to receive(:request)
-          .with(url: "http://datastore/customers/1/contracts",
+          .with(url: 'http://datastore/customers/1/contracts',
                 all: true,
                 params: { limit: 100 }).and_call_original
 
         expect(DHC).to receive(:request)
-          .with([{ url: "http://datastore/customers/1/contracts",
+          .with([{ url: 'http://datastore/customers/1/contracts',
                    all: true,
                    params: { limit: 10, offset: 10 } },
-                 { url: "http://datastore/customers/1/contracts",
+                 { url: 'http://datastore/customers/1/contracts',
                    all: true,
                    params: { limit: 10, offset: 20 } },
-                 { url: "http://datastore/customers/1/contracts",
+                 { url: 'http://datastore/customers/1/contracts',
                    all: true,
                    params: { limit: 10, offset: 30 } }]).and_call_original
 
@@ -265,7 +265,7 @@ describe DHS::Record do
 
       context 'weird array without hrefs' do
         before do
-          stub_request(:get, "http://datastore/options/1?limit=100")
+          stub_request(:get, 'http://datastore/options/1?limit=100')
             .to_return(body: { type: 'REACH_EXT' }.to_json)
         end
 
@@ -375,7 +375,7 @@ describe DHS::Record do
         stub_request(:get, %r{http://datastore/category_relations/1})
           .to_return(
             body: {
-              name: "Category 1"
+              name: 'Category 1'
             }.to_json
           )
       end
@@ -384,7 +384,7 @@ describe DHS::Record do
         stub_request(:get, %r{http://datastore/category_relations/2})
           .to_return(
             body: {
-              name: "Category 2"
+              name: 'Category 2'
             }.to_json
           )
       end
@@ -393,7 +393,7 @@ describe DHS::Record do
         stub_request(:get, %r{http://datastore/category_relations/3})
           .to_return(
             body: {
-              name: "Category 3"
+              name: 'Category 3'
             }.to_json
           )
       end
@@ -415,15 +415,15 @@ describe DHS::Record do
       stub_request(:get, 'http://datastore/places/1/contracts?offset=0&limit=10')
         .to_return(
           body: {
-            href:  "http://datastore/v2/places/1/contracts?offset=0&limit=10",
-            items: [{ href: "http://datastore/v2/contracts/1" }],
+            href: 'http://datastore/v2/places/1/contracts?offset=0&limit=10',
+            items: [{ href: 'http://datastore/v2/contracts/1' }],
             offset: 0,
             limit: 10,
             total: 10
           }.to_json
         )
 
-      stub_request(:get, "http://datastore/v2/contracts/1")
+      stub_request(:get, 'http://datastore/v2/contracts/1')
         .to_return(
           body: {
             customer: { name: 'Swisscom Directories AG' }
@@ -454,25 +454,24 @@ describe DHS::Record do
 
   context 'nested includes all' do
     context 'with optional children' do
-
       let(:favorites_request_stub) do
         stub_request(:get, %r{http://datastore/favorites})
           .to_return(
             body: {
               items: [{
-                href: "http://datastore/favorites/1",
+                href: 'http://datastore/favorites/1',
                 place: {
-                  href: "http://datastore/places/1"
+                  href: 'http://datastore/places/1'
                 }
               }, {
-                href: "http://datastore/favorite/2",
+                href: 'http://datastore/favorite/2',
                 place: {
-                  href: "http://datastore/places/2"
+                  href: 'http://datastore/places/2'
                 }
               }, {
-                href: "http://datastore/favorite/3",
+                href: 'http://datastore/favorite/3',
                 place: {
-                  href: "http://datastore/places/3"
+                  href: 'http://datastore/places/3'
                 }
               }],
               total: 3,
@@ -486,10 +485,10 @@ describe DHS::Record do
         stub_request(:get, %r{http://datastore/places/1})
           .to_return(
             body: {
-              href: "http://datastore/places/1",
+              href: 'http://datastore/places/1',
               name: 'Place 1',
               contracts: {
-                href: "http://datastore/places/1/contracts"
+                href: 'http://datastore/places/1/contracts'
               }
             }.to_json
           )
@@ -499,7 +498,7 @@ describe DHS::Record do
         stub_request(:get, %r{http://datastore/places/2})
           .to_return(
             body: {
-              href: "http://datastore/places/2",
+              href: 'http://datastore/places/2',
               name: 'Place 2'
             }.to_json
           )
@@ -509,10 +508,10 @@ describe DHS::Record do
         stub_request(:get, %r{http://datastore/places/3})
           .to_return(
             body: {
-              href: "http://datastore/places/3",
+              href: 'http://datastore/places/3',
               name: 'Place 3',
               contracts: {
-                href: "http://datastore/places/3/contracts"
+                href: 'http://datastore/places/3/contracts'
               }
             }.to_json
           )
@@ -523,7 +522,7 @@ describe DHS::Record do
           .to_return(
             body: {
               items: [{
-                href: "http://datastore/places/1/contracts/1",
+                href: 'http://datastore/places/1/contracts/1',
                 name: 'Contract 1'
               }],
               total: 1,
@@ -538,7 +537,7 @@ describe DHS::Record do
           .to_return(
             body: {
               items: [{
-                href: "http://datastore/places/3/contracts/1",
+                href: 'http://datastore/places/3/contracts/1',
                 name: 'Contract 3'
               }],
               total: 1,
@@ -593,7 +592,6 @@ describe DHS::Record do
   end
 
   context 'includes collection trough single item' do
-
     before do
       class Place < DHS::Record
         endpoint 'https://places/{id}'
@@ -634,7 +632,6 @@ describe DHS::Record do
   end
 
   context 'does not fail including all linked resources' do
-
     before do
       class CustomerOnboardingToken < DHS::Record
         endpoint 'https://token/{id}'

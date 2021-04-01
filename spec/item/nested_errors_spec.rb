@@ -3,13 +3,12 @@
 require 'rails_helper'
 
 describe DHS::Item do
-
   context 'nested data' do
     before do
       class Presence < DHS::Record
         endpoint 'http://opm/presences'
       end
-      stub_request(:post, "http://opm/presences")
+      stub_request(:post, 'http://opm/presences')
         .to_return(
           body: {
             listings: [{ status: 'CONNECTED' }],

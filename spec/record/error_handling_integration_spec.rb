@@ -5,7 +5,7 @@ require 'dhc/rspec'
 
 describe 'Error handling with chains', type: :request do
   let!(:request) do
-    stub_request(:get, "http://datastore/v2/records?color=blue")
+    stub_request(:get, 'http://datastore/v2/records?color=blue')
       .to_return(status: 404)
   end
 

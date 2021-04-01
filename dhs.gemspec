@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.push File.expand_path("../lib", __FILE__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 
 # Maintain your gem's version:
-require "dhs/version"
+require 'dhs/version'
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "dhs"
+  s.name        = 'dhs'
   s.version     = DHS::VERSION
   s.authors     = ['https://github.com/DePayFi/dhs/graphs/contributors']
   s.email       = ['engineering@depay.fi']

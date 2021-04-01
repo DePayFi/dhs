@@ -11,7 +11,7 @@ describe DHS::Item do
     end
 
     it 'accesses camel case keys using underscore syntax' do
-      stub_request(:get, "http://datastore/records?id=1")
+      stub_request(:get, 'http://datastore/records?id=1')
         .to_return(body: { 'AttributeValue' => 42 }.to_json)
 
       record = Record.find(1)

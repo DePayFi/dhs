@@ -9,7 +9,7 @@ describe DHS::Record do
     class Record < DHS::Record
       endpoint 'http://depay.fi/v2/records'
     end
-    stub_request(:get, "http://depay.fi/v2/records?color=blue")
+    stub_request(:get, 'http://depay.fi/v2/records?color=blue')
       .to_return(status: 400)
   end
 

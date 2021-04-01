@@ -20,7 +20,7 @@ describe DHS::Record do
     end
 
     let!(:contracts_request) do
-      stub_request(:get, "http://datastore/customers/1/contracts")
+      stub_request(:get, 'http://datastore/customers/1/contracts')
         .to_return(
           body: {
             items: 10.times.map do

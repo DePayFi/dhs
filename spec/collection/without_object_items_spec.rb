@@ -14,7 +14,7 @@ describe DHS::Collection do
 
   let(:data) {
     {
-      'authorities' => ['ROLE_USER', 'ROLE_LOCALCH_ACCOUNT']
+      'authorities' => %w[ROLE_USER ROLE_LOCALCH_ACCOUNT]
     }
   }
 

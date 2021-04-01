@@ -10,7 +10,7 @@ describe DHS::Record do
   end
 
   let!(:request_collection) do
-    stub_request(:get, "http://depay.fi/v2/records?color=blue")
+    stub_request(:get, 'http://depay.fi/v2/records?color=blue')
       .to_return(body: {
         items: [
           { href: 'http://depay.fi/v2/records/1' },
@@ -20,14 +20,14 @@ describe DHS::Record do
   end
 
   let!(:request_item_1) do
-    stub_request(:get, "http://depay.fi/v2/records/1?via=collection")
+    stub_request(:get, 'http://depay.fi/v2/records/1?via=collection')
       .to_return(body: {
         name: 'Steve'
       }.to_json)
   end
 
   let!(:request_item_2) do
-    stub_request(:get, "http://depay.fi/v2/records/2?via=collection")
+    stub_request(:get, 'http://depay.fi/v2/records/2?via=collection')
       .to_return(body: {
         name: 'John'
       }.to_json)
@@ -44,14 +44,14 @@ describe DHS::Record do
 
   context 'without options' do
     let!(:request_item_1) do
-      stub_request(:get, "http://depay.fi/v2/records/1")
+      stub_request(:get, 'http://depay.fi/v2/records/1')
         .to_return(body: {
           name: 'Steve'
         }.to_json)
     end
 
     let!(:request_item_2) do
-      stub_request(:get, "http://depay.fi/v2/records/2")
+      stub_request(:get, 'http://depay.fi/v2/records/2')
         .to_return(body: {
           name: 'John'
         }.to_json)

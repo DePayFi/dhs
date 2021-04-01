@@ -10,9 +10,9 @@ describe DHS::Record do
   end
 
   it 'always returns a new chain and does not mutate the original' do
-    blue_request = stub_request(:get, "http://depay.fi/v2/records?color=blue").to_return(body: [].to_json)
+    blue_request = stub_request(:get, 'http://depay.fi/v2/records?color=blue').to_return(body: [].to_json)
     blue_records = Record.where(color: 'blue')
-    blue_active_request = stub_request(:get, "http://depay.fi/v2/records?color=blue&active=true").to_return(body: [].to_json)
+    blue_active_request = stub_request(:get, 'http://depay.fi/v2/records?color=blue&active=true').to_return(body: [].to_json)
     active_blue_records = blue_records.where(active: true)
     blue_records.first
     active_blue_records.first

@@ -4,12 +4,12 @@ require 'rails_helper'
 
 describe 'Option Blocks', type: :request do
   let!(:first_request) do
-    stub_request(:get, "http://datastore/v2/records?request=first")
+    stub_request(:get, 'http://datastore/v2/records?request=first')
       .to_return(status: 200)
   end
 
   let!(:second_request) do
-    stub_request(:get, "http://datastore/v2/records?request=second")
+    stub_request(:get, 'http://datastore/v2/records?request=second')
       .to_return(status: 200)
   end
 

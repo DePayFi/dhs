@@ -24,7 +24,7 @@ describe DHS::Record do
 
   context 'where chains' do
     before do
-      stub_request(:get, "http://datastore/v2/records/?available=true&color=blue&range=%3E26")
+      stub_request(:get, 'http://datastore/v2/records/?available=true&color=blue&range=%3E26')
         .to_return(response)
     end
 
@@ -46,7 +46,7 @@ describe DHS::Record do
 
   context 'multiple parameters' do
     before do
-      stub_request(:get, "http://datastore/v2/records/?parameter=last").to_return(response)
+      stub_request(:get, 'http://datastore/v2/records/?parameter=last').to_return(response)
     end
 
     it 'takes the last value for chains with same name parameters' do

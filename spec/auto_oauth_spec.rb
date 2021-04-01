@@ -3,9 +3,7 @@
 require 'rails_helper'
 
 describe 'Auto OAuth Authentication', type: :request, dummy_models: true do
-
   context 'without DHC::Auth interceptor enabled' do
-
     before do
       DHS.configure do |config|
         config.auto_oauth = -> { access_token }
@@ -22,20 +20,18 @@ describe 'Auto OAuth Authentication', type: :request, dummy_models: true do
   end
 
   context 'with DHC::Auth interceptor enabled' do
-
     context 'with only one auth provider' do
-
       let(:token) { ApplicationController::ACCESS_TOKEN }
 
       let(:record_request) do
-        stub_request(:get, "http://datastore/v2/records_with_oauth/1")
+        stub_request(:get, 'http://datastore/v2/records_with_oauth/1')
           .with(
             headers: { 'Authorization' => "Bearer #{token}" }
           ).to_return(status: 200, body: { name: 'Record' }.to_json)
       end
 
       let(:records_request) do
-        stub_request(:get, "http://datastore/v2/records_with_oauth?color=blue")
+        stub_request(:get, 'http://datastore/v2/records_with_oauth?color=blue')
           .with(
             headers: { 'Authorization' => "Bearer #{token}" }
           ).to_return(status: 200, body: { items: [{ name: 'Record' }] }.to_json)
@@ -64,7 +60,6 @@ describe 'Auto OAuth Authentication', type: :request, dummy_models: true do
     end
 
     context 'with multiple auth providers' do
-
       before do
         DHS.configure do |config|
           config.auto_oauth = proc do
@@ -86,28 +81,28 @@ describe 'Auto OAuth Authentication', type: :request, dummy_models: true do
       let(:token) { ApplicationController::ACCESS_TOKEN }
 
       let(:record_request_provider_1) do
-        stub_request(:get, "http://datastore/v2/records_with_multiple_oauth_providers_1/1")
+        stub_request(:get, 'http://datastore/v2/records_with_multiple_oauth_providers_1/1')
           .with(
             headers: { 'Authorization' => "Bearer #{token}_provider_1" }
           ).to_return(status: 200, body: { name: 'Record' }.to_json)
       end
 
       let(:records_request_provider_2) do
-        stub_request(:get, "http://datastore/v2/records_with_multiple_oauth_providers_2?color=blue")
+        stub_request(:get, 'http://datastore/v2/records_with_multiple_oauth_providers_2?color=blue')
           .with(
             headers: { 'Authorization' => "Bearer #{token}_provider_2" }
           ).to_return(status: 200, body: { items: [{ name: 'Record' }] }.to_json)
       end
 
       let(:records_request_per_endpoint_provider_1) do
-        stub_request(:get, "http://datastore/v2/records_with_multiple_oauth_providers_per_endpoint?color=blue")
+        stub_request(:get, 'http://datastore/v2/records_with_multiple_oauth_providers_per_endpoint?color=blue')
           .with(
             headers: { 'Authorization' => "Bearer #{token}_provider_1" }
           ).to_return(status: 200, body: { items: [{ name: 'Record' }] }.to_json)
       end
 
       let(:record_request_per_endpoint_provider_2) do
-        stub_request(:get, "http://datastore/v2/records_with_multiple_oauth_providers_per_endpoint/1")
+        stub_request(:get, 'http://datastore/v2/records_with_multiple_oauth_providers_per_endpoint/1')
           .with(
             headers: { 'Authorization' => "Bearer #{token}_provider_2" }
           ).to_return(status: 200, body: { name: 'Record' }.to_json)
@@ -127,18 +122,17 @@ describe 'Auto OAuth Authentication', type: :request, dummy_models: true do
     end
 
     context 'with provider enabled for auto oauth' do
-
       let(:token) { ApplicationController::ACCESS_TOKEN }
 
       let(:record_request) do
-        stub_request(:get, "http://internalservice/v2/records/1")
+        stub_request(:get, 'http://internalservice/v2/records/1')
           .with(
             headers: { 'Authorization' => "Bearer #{token}" }
           ).to_return(status: 200, body: { name: 'Record' }.to_json)
       end
 
       let(:records_request) do
-        stub_request(:get, "http://internalservice/v2/records?color=blue")
+        stub_request(:get, 'http://internalservice/v2/records?color=blue')
           .with(
             headers: { 'Authorization' => "Bearer #{token}" }
           ).to_return(status: 200, body: { items: [{ name: 'Record' }] }.to_json)

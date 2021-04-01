@@ -19,7 +19,7 @@ describe DHS::Record do
       expect(feedback).to be_kind_of Feedback
       expect(feedback.recommended).to eq true
       stub_request(:post, 'http://depay.fi/v2/feedbacks')
-        .with(body: "{\"recommended\":true}")
+        .with(body: '{"recommended":true}')
       feedback.save
     end
   end

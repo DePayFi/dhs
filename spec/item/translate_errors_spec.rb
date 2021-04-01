@@ -8,13 +8,13 @@ describe DHS::Item do
       endpoint 'http://dataste/records'
     end
 
-    stub_request(:post, "http://dataste/records")
+    stub_request(:post, 'http://dataste/records')
       .to_return(
         status: 400,
         body: {
           field_errors: [{
-            "code" => "UNSUPPORTED_PROPERTY_VALUE",
-            "path" => ["name"]
+            'code' => 'UNSUPPORTED_PROPERTY_VALUE',
+            'path' => ['name']
           }]
         }.to_json
       )

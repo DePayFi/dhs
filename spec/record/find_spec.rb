@@ -49,7 +49,6 @@ describe DHS::Record do
         expect(LatestAGB.find.pdf).to eq 'http://depay.fi/1.pdf'
       end
     end
-
   end
 
   it 'raises if empty id' do
@@ -64,7 +63,7 @@ describe DHS::Record do
 
   it 'finds unique item by providing parameters' do
     stub_request(:get, "#{datastore}/content-ads/123/feedbacks/123")
-      .to_return(body: "{}")
+      .to_return(body: '{}')
     data = Record.find(campaign_id: '123', id: '123')
     expect(data._proxy).to be_kind_of DHS::Item
   end

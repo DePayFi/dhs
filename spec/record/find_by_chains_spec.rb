@@ -7,7 +7,7 @@ describe DHS::Record do
     class Record < DHS::Record
       endpoint 'http://datastore/records/'
     end
-    stub_request(:get, "http://datastore/records/?limit=1&name=Steve&color=blue")
+    stub_request(:get, 'http://datastore/records/?limit=1&name=Steve&color=blue')
       .to_return(body: [{ name: 'Steve', color: 'blue' }].to_json)
   end
 

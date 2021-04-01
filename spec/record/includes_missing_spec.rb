@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe DHS::Record do
-
   context 'merge request options ' do
     before do
       class Record < DHS::Record
@@ -19,30 +18,29 @@ describe DHS::Record do
           ]
         }.to_json)
 
-      stub_request(:get, "https://attributes/restaurant?limit=100")
+      stub_request(:get, 'https://attributes/restaurant?limit=100')
         .to_return(body: {}.to_json)
-      stub_request(:get, "https://attributes/restaurant")
+      stub_request(:get, 'https://attributes/restaurant')
         .to_return(body: {}.to_json)
-      stub_request(:get, "https://attributes/bar?limit=100")
+      stub_request(:get, 'https://attributes/bar?limit=100')
         .to_return(body: {
           group: {
             href: 'https://group/general'
           }
         }.to_json)
-      stub_request(:get, "https://attributes/cafe?limit=100")
+      stub_request(:get, 'https://attributes/cafe?limit=100')
         .to_return(body: {
           group: {
             href: 'https://group/general'
           }
         }.to_json)
-      stub_request(:get, "https://group/general?limit=100&status=active")
+      stub_request(:get, 'https://group/general?limit=100&status=active')
         .to_return(body: {
           name: 'General'
         }.to_json)
     end
 
     context 'missing referenced options due to none existance of include' do
-
       it 'does not raise when trying to merge options with the options block' do
         DHS.options(throttle: { break: '80%' }) do
           record = Record

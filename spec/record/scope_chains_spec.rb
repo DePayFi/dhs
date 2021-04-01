@@ -23,14 +23,14 @@ describe DHS::Record do
 
   context 'scope chains' do
     it 'allows chaining multiple scopes' do
-      stub_request(:get, "http://datastore/v2/records/?availalbe=true&color=blue&limit=20").to_return(response)
+      stub_request(:get, 'http://datastore/v2/records/?availalbe=true&color=blue&limit=20').to_return(response)
       expect(
         Record.blue.available.limited_to(20).first.name
       ).to eq 'Steve'
     end
 
     it 'allows to chain multiple scopes when first one has arguments' do
-      stub_request(:get, "http://datastore/v2/records/?availalbe=true&color=blue&limit=20").to_return(response)
+      stub_request(:get, 'http://datastore/v2/records/?availalbe=true&color=blue&limit=20').to_return(response)
       expect(
         Record.limited_to(20).blue.available.first.name
       ).to eq 'Steve'

@@ -52,7 +52,7 @@ describe DHS::Record do
 
     it 'clones mappings when using include' do
       class Agb < DHS::Record
-        endpoint "{+datastore}/agbs/active?agb_type=CC_TOU"
+        endpoint '{+datastore}/agbs/active?agb_type=CC_TOU'
         def pdf_url
           self['binary_url_pdf_de']
         end
@@ -85,6 +85,7 @@ describe DHS::Record do
           company_name
         end
       end
+
       class Favorite < DHS::Record
         endpoint '{+datastore}/favorites'
         endpoint '{+datastore}/favorites/{id}'

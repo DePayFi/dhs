@@ -5,7 +5,7 @@ require 'rails_helper'
 describe DHS::Record do
   before do
     class Location < DHS::Record
-      configuration item_key: [:response, :location]
+      configuration item_key: %i[response location]
       endpoint 'http://uberall/location'
       endpoint 'http://uberall/location/{id}'
     end

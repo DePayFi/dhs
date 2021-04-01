@@ -15,15 +15,15 @@ describe DHS::Proxy do
 
   context 'identifying records' do
     it 'identifies records correctly even if parent record has another configuration set' do
-      stub_request(:get, "http://search/results?what=Blumen")
+      stub_request(:get, 'http://search/results?what=Blumen')
         .to_return(body: {
           place: { href: 'http://datastore/places/1' }
         }.to_json)
-      stub_request(:get, "http://datastore/places/1")
+      stub_request(:get, 'http://datastore/places/1')
         .to_return(body: {
           feedbacks: { href: 'http://datastore/places/1/feedbacks?limit=10&offset=0' }
         }.to_json)
-      stub_request(:get, "http://datastore/places/1/feedbacks?limit=10&offset=0")
+      stub_request(:get, 'http://datastore/places/1/feedbacks?limit=10&offset=0')
         .to_return(body: {
           items: [{ review: 'Nice restaurant' }]
         }.to_json)

@@ -17,10 +17,12 @@ module DHS
       autoload :ThreadRegistry, 'dhs/interceptors/auto_oauth/thread_registry'
       autoload :Interceptor, 'dhs/interceptors/auto_oauth/interceptor'
     end
+
     module RequestCycleCache
       autoload :ThreadRegistry, 'dhs/interceptors/request_cycle_cache/thread_registry'
       autoload :Interceptor, 'dhs/interceptors/request_cycle_cache/interceptor'
     end
+
     module ExtendedRollbar
       autoload :ThreadRegistry, 'dhs/interceptors/extended_rollbar/thread_registry'
       autoload :Interceptor, 'dhs/interceptors/extended_rollbar/interceptor'

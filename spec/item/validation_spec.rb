@@ -35,7 +35,7 @@ describe DHS::Item do
       class User < DHS::Record
         endpoint 'http://datastore/v2/users', validates: { params: { publish: false } }
       end
-      stub_request(:post, "http://datastore/v2/users?publish=false").to_return(body: {}.to_json)
+      stub_request(:post, 'http://datastore/v2/users?publish=false').to_return(body: {}.to_json)
       expect(user.valid?).to eq true
     end
 
@@ -43,7 +43,7 @@ describe DHS::Item do
       class User < DHS::Record
         endpoint 'http://datastore/v2/users', validates: { params: { persist: false } }
       end
-      stub_request(:post, "http://datastore/v2/users?persist=false").to_return(body: {}.to_json)
+      stub_request(:post, 'http://datastore/v2/users?persist=false').to_return(body: {}.to_json)
       expect(user.valid?).to eq true
     end
 
@@ -51,7 +51,7 @@ describe DHS::Item do
       class User < DHS::Record
         endpoint 'http://datastore/v2/users', validates: { params: { validates: true } }
       end
-      stub_request(:post, "http://datastore/v2/users?validates=true").to_return(body: {}.to_json)
+      stub_request(:post, 'http://datastore/v2/users?validates=true').to_return(body: {}.to_json)
       expect(user.valid?).to eq true
     end
 
@@ -59,18 +59,18 @@ describe DHS::Item do
       class User < DHS::Record
         endpoint 'http://datastore/v2/users', validates: { path: 'validate' }
       end
-      stub_request(:post, "http://datastore/v2/users/validate").to_return(body: {}.to_json)
+      stub_request(:post, 'http://datastore/v2/users/validate').to_return(body: {}.to_json)
       expect(user.valid?).to eq true
     end
   end
 
   context 'errors object' do
-    let(:validation_errors) { { field_errors: [{ code: "UNSUPPORTED_PROPERTY_VALUE", "path" => ["email"] }] } }
+    let(:validation_errors) { { field_errors: [{ code: 'UNSUPPORTED_PROPERTY_VALUE', 'path' => ['email'] }] } }
     let(:successful_validation) do
-      stub_request(:post, "http://datastore/v2/users?persist=false").to_return(body: {}.to_json)
+      stub_request(:post, 'http://datastore/v2/users?persist=false').to_return(body: {}.to_json)
     end
     let(:failing_validation) do
-      stub_request(:post, "http://datastore/v2/users?persist=false")
+      stub_request(:post, 'http://datastore/v2/users?persist=false')
         .to_return(status: 400, body: validation_errors.to_json)
     end
 
@@ -121,7 +121,7 @@ describe DHS::Item do
     end
 
     it 'takes local params when generating validation url' do
-      stub_request(:post, "http://datastore/v2/users/2?persist=false")
+      stub_request(:post, 'http://datastore/v2/users/2?persist=false')
         .to_return(status: 201)
       expect(
         user.valid?(params: { user_id: 2 })

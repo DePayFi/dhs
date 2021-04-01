@@ -7,15 +7,15 @@ describe DHS::Item do
 
   let(:error_format_fields) do
     {
-      "status" => 400,
-      "message" => "ratings must be set when review or name or review_title is set | The property value is required; it cannot be null, empty, or blank.",
-      "fields" => [
+      'status' => 400,
+      'message' => 'ratings must be set when review or name or review_title is set | The property value is required; it cannot be null, empty, or blank.',
+      'fields' => [
         {
-          "name" => "ratings",
-          "details" => [{ "code" => "REQUIRED_PROPERTY_VALUE" }, { "code" => "UNSUPPORTED_PROPERTY_VALUE" }]
+          'name' => 'ratings',
+          'details' => [{ 'code' => 'REQUIRED_PROPERTY_VALUE' }, { 'code' => 'UNSUPPORTED_PROPERTY_VALUE' }]
         }, {
-          "name" => "recommended",
-          "details" => [{ "code" => "REQUIRED_PROPERTY_VALUE" }]
+          'name' => 'recommended',
+          'details' => [{ 'code' => 'REQUIRED_PROPERTY_VALUE' }]
         }
       ]
     }
@@ -23,20 +23,20 @@ describe DHS::Item do
 
   let(:error_format_field_errors) do
     {
-      "status" => 400,
-      "message" => "Some data in the request body failed validation. Inspect the field errors for details.",
-      "field_errors" => [{
-        "code" => "UNSUPPORTED_PROPERTY_VALUE",
-        "path" => ["gender"],
-        "message" => "The property value is unsupported. Supported values are: FEMALE, MALE"
+      'status' => 400,
+      'message' => 'Some data in the request body failed validation. Inspect the field errors for details.',
+      'field_errors' => [{
+        'code' => 'UNSUPPORTED_PROPERTY_VALUE',
+        'path' => ['gender'],
+        'message' => 'The property value is unsupported. Supported values are: FEMALE, MALE'
       }, {
-        "code" => "INCOMPLETE_PROPERTY_VALUE",
-        "path" => ["gender"],
-        "message" => "The property value is incomplete. It misses some data"
+        'code' => 'INCOMPLETE_PROPERTY_VALUE',
+        'path' => ['gender'],
+        'message' => 'The property value is incomplete. It misses some data'
       }, {
-        "code" => "INCOMPLETE_PROPERTY_VALUE",
-        "path" => ["contract", "entry_id"],
-        "message" => "The property value is incomplete. It misses some data"
+        'code' => 'INCOMPLETE_PROPERTY_VALUE',
+        'path' => %w[contract entry_id],
+        'message' => 'The property value is incomplete. It misses some data'
       }]
     }
   end
@@ -75,7 +75,7 @@ describe DHS::Item do
       expect(record.name).to eq 'Steve'
       expect(record.errors.include?(:ratings)).to eq true
       expect(record.errors.include?(:recommended)).to eq true
-      expect(record.errors[:ratings]).to eq ['REQUIRED_PROPERTY_VALUE', 'UNSUPPORTED_PROPERTY_VALUE']
+      expect(record.errors[:ratings]).to eq %w[REQUIRED_PROPERTY_VALUE UNSUPPORTED_PROPERTY_VALUE]
       expect(record.errors[:recommended]).to eq ['REQUIRED_PROPERTY_VALUE']
     end
 
@@ -96,7 +96,7 @@ describe DHS::Item do
       expect(record.errors.any?).to eq true
       expect(record.errors.include?(:gender)).to eq true
       expect(record.errors.include?(:"contract.entry_id")).to eq true
-      expect(record.errors[:gender]).to eq ['UNSUPPORTED_PROPERTY_VALUE', 'INCOMPLETE_PROPERTY_VALUE']
+      expect(record.errors[:gender]).to eq %w[UNSUPPORTED_PROPERTY_VALUE INCOMPLETE_PROPERTY_VALUE]
       expect(record.errors[:"contract.entry_id"]).to eq ['INCOMPLETE_PROPERTY_VALUE']
     end
 
@@ -109,7 +109,7 @@ describe DHS::Item do
       expect(record.name).to eq 'Steve'
       expect(record.errors.include?(:ratings)).to eq true
       expect(record.errors.include?(:recommended)).to eq true
-      expect(record.errors[:ratings]).to eq ['REQUIRED_PROPERTY_VALUE', 'UNSUPPORTED_PROPERTY_VALUE']
+      expect(record.errors[:ratings]).to eq %w[REQUIRED_PROPERTY_VALUE UNSUPPORTED_PROPERTY_VALUE]
       expect(record.errors[:recommended]).to eq ['REQUIRED_PROPERTY_VALUE']
     end
   end
@@ -189,20 +189,20 @@ describe DHS::Item do
   context 'nested data' do
     let(:body_with_errors) do
       {
-        "status" => 400,
-        "message" => "Some data in the request body failed validation. Inspect the field errors for details.",
-        "field_errors" => [{
-          "code" => "UNSUPPORTED_PROPERTY_VALUE",
-          "path" => ["reviews", 0, "name"],
-          "message" => "The property value is unsupported. Supported values are: FEMALE, MALE"
+        'status' => 400,
+        'message' => 'Some data in the request body failed validation. Inspect the field errors for details.',
+        'field_errors' => [{
+          'code' => 'UNSUPPORTED_PROPERTY_VALUE',
+          'path' => ['reviews', 0, 'name'],
+          'message' => 'The property value is unsupported. Supported values are: FEMALE, MALE'
         }, {
-          "code" => "INCOMPLETE_PROPERTY_VALUE",
-          "path" => ["address", "street", "name"],
-          "message" => "The property value is incomplete. It misses some data"
+          'code' => 'INCOMPLETE_PROPERTY_VALUE',
+          'path' => %w[address street name],
+          'message' => 'The property value is incomplete. It misses some data'
         }, {
-          "code" => "REQUIRED_PROPERTY_VALUE",
-          "path" => ["address", "street", "additional_line1"],
-          "message" => "The property value is required"
+          'code' => 'REQUIRED_PROPERTY_VALUE',
+          'path' => %w[address street additional_line1],
+          'message' => 'The property value is required'
         }]
       }
     end

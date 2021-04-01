@@ -33,20 +33,20 @@ describe DHS::Data do
   end
 
   it 'converts collection with options to json' do
-    expect(collection.as_json(only: [:items, :href])).to eq(
-      "items" => [
-        { "href" => "http://depay.fi/v2/feedbacks/0sdaetZ-OWVg4oBiBJ-7IQ" },
-        { "href" => "http://depay.fi/v2/feedbacks/QsUOQWNJoB-GFUNsX7z0jg" },
-        { "href" => "http://depay.fi/v2/feedbacks/QynNtmpXlsEGvUJ0ekDKVw" },
-        { "href" => "http://depay.fi/v2/feedbacks/INmminYWNZwW_qNFx5peJQ" },
-        { "href" => "http://depay.fi/v2/feedbacks/ltgfr0VRYDN2nxyC119wTg" },
-        { "href" => "http://depay.fi/v2/feedbacks/5dUdQP-kZ6sulN8NtpGXTw" },
-        { "href" => "http://depay.fi/v2/feedbacks/Z3KfWzIEQ3ZVCUj2IdrSNQ" },
-        { "href" => "http://depay.fi/v2/feedbacks/ZUUUeiw-Stw5Zb1baHDUzQ" },
-        { "href" => "http://depay.fi/v2/feedbacks/GyeWvhEtU4cYN_5T2FX2UA" },
-        { "href" => "http://depay.fi/v2/feedbacks/o-qTRqQGFS3Z_RPJm1f8SA" }
+    expect(collection.as_json(only: %i[items href])).to eq(
+      'items' => [
+        { 'href' => 'http://depay.fi/v2/feedbacks/0sdaetZ-OWVg4oBiBJ-7IQ' },
+        { 'href' => 'http://depay.fi/v2/feedbacks/QsUOQWNJoB-GFUNsX7z0jg' },
+        { 'href' => 'http://depay.fi/v2/feedbacks/QynNtmpXlsEGvUJ0ekDKVw' },
+        { 'href' => 'http://depay.fi/v2/feedbacks/INmminYWNZwW_qNFx5peJQ' },
+        { 'href' => 'http://depay.fi/v2/feedbacks/ltgfr0VRYDN2nxyC119wTg' },
+        { 'href' => 'http://depay.fi/v2/feedbacks/5dUdQP-kZ6sulN8NtpGXTw' },
+        { 'href' => 'http://depay.fi/v2/feedbacks/Z3KfWzIEQ3ZVCUj2IdrSNQ' },
+        { 'href' => 'http://depay.fi/v2/feedbacks/ZUUUeiw-Stw5Zb1baHDUzQ' },
+        { 'href' => 'http://depay.fi/v2/feedbacks/GyeWvhEtU4cYN_5T2FX2UA' },
+        { 'href' => 'http://depay.fi/v2/feedbacks/o-qTRqQGFS3Z_RPJm1f8SA' }
       ],
-      "href" => "http://depay.fi/v2/feedbacks/?exclude_hidden=false&offset=0&limit=10"
+      'href' => 'http://depay.fi/v2/feedbacks/?exclude_hidden=false&offset=0&limit=10'
     )
   end
 
@@ -62,7 +62,7 @@ describe DHS::Data do
 
     it 'converts with options to json' do
       expect(collection.as_json(only: :foo)).to eq [{ 'foo' => 'foo' }]
-      expect(collection.to_json(only: :foo)).to eq "[{\"foo\":\"foo\"}]"
+      expect(collection.to_json(only: :foo)).to eq '[{"foo":"foo"}]'
     end
   end
 end

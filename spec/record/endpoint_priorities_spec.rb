@@ -3,9 +3,7 @@
 require 'rails_helper'
 
 describe DHS::Record do
-
   context 'endpoint priorities' do
-
     before do
       class Record < DHS::Record
         endpoint 'https://api/v2/feedbacks'
@@ -17,9 +15,9 @@ describe DHS::Record do
     end
 
     it 'always takes the first endpoint found' do
-      stub_request(:get, "https://api/v2/feedbacks").to_return(status: 200)
+      stub_request(:get, 'https://api/v2/feedbacks').to_return(status: 200)
       Record.fetch
-      stub_request(:get, "https://api/v2/streets/1").to_return(status: 200)
+      stub_request(:get, 'https://api/v2/streets/1').to_return(status: 200)
       Record.find(1)
     end
   end

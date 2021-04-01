@@ -5,15 +5,15 @@ require 'rails_helper'
 describe DHS::Record do
   before do
     class Business < DHS::Record
-      configuration item_created_key: [:response, :business], limit_key: [:response, :max], pagination_key: [:response, :offset], total_key: [:response, :count], pagination_strategy: :offset
+      configuration item_created_key: %i[response business], limit_key: %i[response max], pagination_key: %i[response offset], total_key: %i[response count], pagination_strategy: :offset
       endpoint 'http://uberall/businesses'
     end
   end
 
   let(:stub_create_business_request) do
-    stub_request(:post, "http://uberall/businesses")
+    stub_request(:post, 'http://uberall/businesses')
       .to_return(body: {
-        status: "SUCCESS",
+        status: 'SUCCESS',
         response: {
           business: {
             identifier: 'ABC123',

@@ -4,7 +4,6 @@ require 'rails_helper'
 
 describe DHS::Record do
   context 'merge' do
-
     before do
       class Change < DHS::Record
         endpoint 'https://onboarding/places/{id}/change'
@@ -12,7 +11,7 @@ describe DHS::Record do
     end
 
     it 'merges a given hash' do
-      stub_request(:get, "https://onboarding/places/1/change")
+      stub_request(:get, 'https://onboarding/places/1/change')
         .to_return(body: { entry: { name: 'Steve', address: 'Zurich' }, products: ['LBP'] }.to_json)
       record = Change.find(1)
       record.merge!(entry: { name: 'Paul' })
@@ -22,7 +21,7 @@ describe DHS::Record do
     end
 
     it 'merges! a given hash' do
-      stub_request(:get, "https://onboarding/places/1/change")
+      stub_request(:get, 'https://onboarding/places/1/change')
         .to_return(body: { entry: { name: 'Steve', address: 'Zurich' }, products: ['LBP'] }.to_json)
       record = Change.find(1)
       new_record = record.merge(entry: { name: 'Paul' })
@@ -35,7 +34,7 @@ describe DHS::Record do
     end
 
     it 'deep_merge! a given hash' do
-      stub_request(:get, "https://onboarding/places/1/change")
+      stub_request(:get, 'https://onboarding/places/1/change')
         .to_return(body: { entry: { name: 'Steve', address: 'Zurich' } }.to_json)
       record = Change.find(1)
       record.deep_merge!(entry: { name: 'Paul' })
@@ -44,7 +43,7 @@ describe DHS::Record do
     end
 
     it 'deep_merge a given hash' do
-      stub_request(:get, "https://onboarding/places/1/change")
+      stub_request(:get, 'https://onboarding/places/1/change')
         .to_return(body: { entry: { name: 'Steve', address: 'Zurich' } }.to_json)
       record = Change.find(1)
       new_record = record.deep_merge(entry: { name: 'Paul' })

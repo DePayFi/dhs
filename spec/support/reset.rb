@@ -12,7 +12,7 @@ end
 
 class DHS::Record
 
-  DESCENDANTS = []
+  DESCENDANTS = [].freeze
 
   def self.inherited(child)
     DESCENDANTS.push(child)
@@ -34,7 +34,7 @@ def reset_dhs
   DHS::Record::Endpoints.all = {}
   DHS::Record::DESCENDANTS.each do |decendant|
     decendant.endpoints = [] if !decendant.name['DHS'] && defined?(decendant.endpoints)
-    decendant.configuration({}) if !decendant.name['DHS']
+    decendant.configuration({}) unless decendant.name['DHS']
   end
 end
 

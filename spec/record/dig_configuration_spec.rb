@@ -6,10 +6,10 @@ describe DHS::Record do
   before do
     class Business < DHS::Record
       configuration(
-        items_key: [:response, :businesses],
-        total_key: [:response, :count],
-        limit_key: { body: [:response, :max] },
-        pagination_key: { body: [:response, :offset] },
+        items_key: %i[response businesses],
+        total_key: %i[response count],
+        limit_key: { body: %i[response max] },
+        pagination_key: { body: %i[response offset] },
         pagination_strategy: :offset
       )
       endpoint 'http://uberall/businesses'
@@ -17,9 +17,9 @@ describe DHS::Record do
   end
 
   let(:stub_single_business_request) do
-    stub_request(:get, "http://uberall/businesses?identifier=ABC123&limit=1")
+    stub_request(:get, 'http://uberall/businesses?identifier=ABC123&limit=1')
       .to_return(body: {
-        status: "SUCCESS",
+        status: 'SUCCESS',
         response: {
           offset: 0,
           max: 50,
@@ -35,9 +35,9 @@ describe DHS::Record do
   end
 
   let(:stub_multiple_businesses_request) do
-    stub_request(:get, "http://uberall/businesses?name=depay")
+    stub_request(:get, 'http://uberall/businesses?name=depay')
       .to_return(body: {
-        status: "SUCCESS",
+        status: 'SUCCESS',
         response: {
           offset: 0,
           max: 50,

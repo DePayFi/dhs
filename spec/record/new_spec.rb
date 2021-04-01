@@ -18,8 +18,8 @@ describe DHS::Record do
       feedback = Rating.new recommended: true
       expect(feedback).to be_kind_of Rating
       expect(feedback.recommended).to eq true
-      stub_request(:post, "http://depay.fi/v2/feedbacks")
-        .with(body: "{\"recommended\":true}")
+      stub_request(:post, 'http://depay.fi/v2/feedbacks')
+        .with(body: '{"recommended":true}')
       feedback.save
     end
 

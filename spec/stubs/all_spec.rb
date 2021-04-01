@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'dhs/rspec'
 
 describe DHS do
-
   before do
     class Record < DHS::Record
       endpoint 'https://records'
@@ -27,7 +26,6 @@ describe DHS do
   end
 
   context 'without conditions' do
-
     before do
       class Record < DHS::Record
         endpoint 'https://records'
@@ -48,7 +46,6 @@ describe DHS do
   end
 
   context 'with configured record' do
-
     before do
       class Record < DHS::Record
         configuration limit_key: :per_page, pagination_strategy: :page, pagination_key: :page

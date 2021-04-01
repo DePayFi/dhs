@@ -13,7 +13,7 @@ describe DHS::Collection do
       configuration items_key: :docs, limit_key: :size, pagination_key: :start, pagination_strategy: :start, total_key: :totalResults
       endpoint '{+search}/{type}'
     end
-    stub_request(:get, "http://depay.fi/search/phonebook?size=10").to_return(
+    stub_request(:get, 'http://depay.fi/search/phonebook?size=10').to_return(
       body: {
         docs: (1..10).to_a,
         start: 1,
@@ -21,7 +21,7 @@ describe DHS::Collection do
         totalResults: total
       }.to_json
     )
-    stub_request(:get, "http://depay.fi/search/phonebook?size=10&start=11").to_return(
+    stub_request(:get, 'http://depay.fi/search/phonebook?size=10&start=11').to_return(
       body: {
         docs: (11..20).to_a,
         start: 11,

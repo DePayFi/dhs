@@ -34,6 +34,7 @@ describe DHS::Collection do
       endpoint '{+datastore}/feedbacks'
       endpoint '{+datastore}/feedbacks/{id}'
     end
+
     class User < DHS::Record
       endpoint '{+datastore}/users'
       endpoint '{+datastore}/users/{id}'

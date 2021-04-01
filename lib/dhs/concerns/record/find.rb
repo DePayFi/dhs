@@ -22,7 +22,7 @@ class DHS::Record
             find_by_id(args, options)
           end
         return nil if data.nil?
-        return data if !data._record
+        return data unless data._record
         if data.collection?
           data.map { |record| data._record.new(record.unwrap_nested_item) }
         else

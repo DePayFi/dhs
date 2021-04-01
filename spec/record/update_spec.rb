@@ -4,7 +4,6 @@ require 'rails_helper'
 
 describe DHS::Record do
   context 'update' do
-
     before do
       class Record < DHS::Record
         endpoint 'http://datastore/records/{id}'
@@ -12,7 +11,7 @@ describe DHS::Record do
     end
 
     it 'allows to directly update a record without fetching it first' do
-      stub_request(:post, "http://datastore/records/123")
+      stub_request(:post, 'http://datastore/records/123')
         .with(body: { name: 'Steve' }.to_json)
         .to_return(status: 200, body: {}.to_json)
 
@@ -23,7 +22,7 @@ describe DHS::Record do
     end
 
     it 'does not fail during an error with update' do
-      stub_request(:post, "http://datastore/records/123")
+      stub_request(:post, 'http://datastore/records/123')
         .with(body: { name: 'Steve' }.to_json)
         .to_return(status: 404, body: {}.to_json)
 
@@ -36,7 +35,7 @@ describe DHS::Record do
     end
 
     it 'allows to directly update! a record without fetching it first' do
-      stub_request(:post, "http://datastore/records/123")
+      stub_request(:post, 'http://datastore/records/123')
         .with(body: { name: 'Steve' }.to_json)
         .to_return(status: 200)
 
@@ -47,7 +46,7 @@ describe DHS::Record do
     end
 
     it 'raises an error when trying to update! but retrieving an error status' do
-      stub_request(:post, "http://datastore/records/123")
+      stub_request(:post, 'http://datastore/records/123')
         .with(body: { name: 'Steve' }.to_json)
         .to_return(status: 404)
 

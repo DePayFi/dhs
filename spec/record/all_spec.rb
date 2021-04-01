@@ -11,7 +11,7 @@ describe DHS::Record do
     end
 
     it 'is querying endpoint without pagination when using all' do
-      stub_request(:get, "http://datastore/feedbacks?limit=100").to_return(body: { items: 300.times.map { { foo: 'bar' } }, total: 300 }.to_json)
+      stub_request(:get, 'http://datastore/feedbacks?limit=100').to_return(body: { items: 300.times.map { { foo: 'bar' } }, total: 300 }.to_json)
       records = Record.all
       expect(records).to be_kind_of Record
       expect(records.size).to eq(300)
@@ -21,7 +21,7 @@ describe DHS::Record do
       let(:total) { 22 }
       let(:limit) { 10 }
       let!(:first_page_request) do
-        stub_request(:get, "http://datastore/feedbacks?color=blue&limit=100")
+        stub_request(:get, 'http://datastore/feedbacks?color=blue&limit=100')
           .to_return(body: { items: 10.times.map { { foo: 'bar' } }, total: total, limit: limit, offset: 0 }.to_json)
       end
       let!(:second_page_request) do
@@ -123,7 +123,7 @@ describe DHS::Record do
       end
 
       it 'just fetches the first response' do
-        stub_request(:get, "http://datastore/records")
+        stub_request(:get, 'http://datastore/records')
           .to_return(body: [{ name: 'Steve' }].to_json)
         records = Record.all
         expect(records.first.name).to eq 'Steve'

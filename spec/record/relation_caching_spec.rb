@@ -117,5 +117,4 @@ describe DHS::Record do
       expect(place.available_assets.first).to be_a(AvailableAsset)
     end
   end
-
 end

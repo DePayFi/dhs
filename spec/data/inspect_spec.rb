@@ -38,7 +38,7 @@ describe DHS::Data do
     end
 
     it 'prints inspected data on multiple lines' do
-      expect_inspect_to_look_like data, %Q{
+      expect_inspect_to_look_like data, %{
         Data of Record #{data.object_id}
         > pets > 0
         :name => \"Steve\"
@@ -50,7 +50,7 @@ describe DHS::Data do
       let(:data) { record.pets.first.kind.animal }
 
       it 'prints the breadcrumb that shows you the current location within the main record' do
-        expect_inspect_to_look_like data, %Q{
+        expect_inspect_to_look_like data, %{
           Data of Record #{data.object_id}
           > pets > 0 > kind > animal
           :type => \"Monkey\"
@@ -64,7 +64,7 @@ describe DHS::Data do
       let(:data) { record.first }
 
       it 'prints href as object id' do
-        expect_inspect_to_look_like data, %Q{
+        expect_inspect_to_look_like data, %{
           Record #{href}
           :name => \"Steve\"
         }
@@ -77,7 +77,7 @@ describe DHS::Data do
       let(:data) { record }
 
       it 'prints id attribute as object id' do
-        expect_inspect_to_look_like data, %Q{
+        expect_inspect_to_look_like data, %{
           Record #{id}
           :id => 1
           :name => \"Steve\"

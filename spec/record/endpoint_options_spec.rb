@@ -23,12 +23,11 @@ describe DHS::Record do
           url: 'backend/v2/feedbacks/1'
         ).and_call_original
 
-      stub_request(:get, "http://backend/v2/feedbacks/1").to_return(status: 200)
+      stub_request(:get, 'http://backend/v2/feedbacks/1').to_return(status: 200)
       Record.find(1)
     end
 
     context 'deep merge endpoint options' do
-
       before do
         class Location < DHS::Record
           endpoint 'http://uberall/locations', headers: { privateKey: '123' }
@@ -36,7 +35,7 @@ describe DHS::Record do
       end
 
       it 'deep merges options to not overwrite endpoint options' do
-        stub_request(:get, "http://uberall/locations")
+        stub_request(:get, 'http://uberall/locations')
           .with(
             headers: {
               'Privatekey' => '123',

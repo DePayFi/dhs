@@ -103,3 +103,33 @@ Style/CaseLikeIf:
 
 Style/HashEachMethods:
   Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Style/RedundantPercentQ:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Style/SymbolProc:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
+Layout/ElseAlignment:
+  Enabled: false

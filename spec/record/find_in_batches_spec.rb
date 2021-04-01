@@ -98,7 +98,7 @@ describe DHS::Collection do
       class Record < DHS::Record
         endpoint '{+datastore}/{campaign_id}/feedbacks'
         endpoint '{+datastore}/feedbacks'
-        configuration items_key: [:response, :docs], limit_key: { body: [:response, :size], parameter: :size }, pagination_key: { body: [:response, :start], parameter: :start }, pagination_strategy: :start, total_key: [:response, :totalResults]
+        configuration items_key: %i[response docs], limit_key: { body: %i[response size], parameter: :size }, pagination_key: { body: %i[response start], parameter: :start }, pagination_strategy: :start, total_key: %i[response totalResults]
       end
     end
 

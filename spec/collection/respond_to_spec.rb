@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe DHS::Collection do
   let(:data) do
-    ['ROLE_USER', 'ROLE_LOCALCH_ACCOUNT']
+    %w[ROLE_USER ROLE_LOCALCH_ACCOUNT]
   end
 
   let(:collection) do

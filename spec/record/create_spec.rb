@@ -51,14 +51,14 @@ describe DHS::Record do
     context 'creation errors' do
       let(:creation_error) do
         {
-          "status" => 400,
-          "fields" => [
+          'status' => 400,
+          'fields' => [
             {
-              "name" => "ratings",
-              "details" => [{ "code" => "REQUIRED_PROPERTY_VALUE" }]
+              'name' => 'ratings',
+              'details' => [{ 'code' => 'REQUIRED_PROPERTY_VALUE' }]
             }, {
-              "name" => "recommended",
-              "details" => [{ "code" => "REQUIRED_PROPERTY_VALUE" }]
+              'name' => 'recommended',
+              'details' => [{ 'code' => 'REQUIRED_PROPERTY_VALUE' }]
             }
           ]
         }
@@ -146,9 +146,9 @@ describe DHS::Record do
       let(:name)       { 'Sebastian' }
 
       it 'Loads the data from the "Location" header after creation' do
-        stub_request(:post, "http://datastore/contact_persons")
+        stub_request(:post, 'http://datastore/contact_persons')
           .to_return(status: 204, headers: { Location: location })
-        stub_request(:get, "http://datastore/contact_persons/1")
+        stub_request(:get, 'http://datastore/contact_persons/1')
           .to_return(body: { href: location, name: name, created_at: created_at }.to_json)
         contact_person = ContactPerson.create!(name: name)
         expect(contact_person.href).to eq location

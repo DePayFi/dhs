@@ -3,17 +3,14 @@
 require 'rails_helper'
 
 describe DHS::Record do
-
   context 'last' do
-
     context 'for not paginated endpoints' do
-
       before do
         class Sector < DHS::Record
           endpoint 'http://services/sectors'
         end
 
-        stub_request(:get, "http://services/sectors?limit=1")
+        stub_request(:get, 'http://services/sectors?limit=1')
           .to_return(
             body: [{ number: 1 }, { number: 2 }, { number: 3 }].to_json
           )
@@ -27,13 +24,12 @@ describe DHS::Record do
     end
 
     context 'for paginated endpoints' do
-
       before do
         class Place < DHS::Record
           endpoint 'http://datastore/places'
         end
 
-        stub_request(:get, "http://datastore/places?limit=1")
+        stub_request(:get, 'http://datastore/places?limit=1')
           .to_return(
             body: {
               items: [
@@ -45,7 +41,7 @@ describe DHS::Record do
             }.to_json
           )
 
-        stub_request(:get, "http://datastore/places?limit=1&offset=499")
+        stub_request(:get, 'http://datastore/places?limit=1&offset=499')
           .to_return(
             body: {
               items: [

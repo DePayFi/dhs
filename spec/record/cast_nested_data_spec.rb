@@ -5,18 +5,18 @@ require 'rails_helper'
 describe DHS::Record do
   context 'cast nested data' do
     let(:stub_customer_request) do
-      stub_request(:get, "https://datastore/customers?limit=1")
+      stub_request(:get, 'https://datastore/customers?limit=1')
         .to_return(
           body: {
             items: [
               {
-                href: "https://datastore/customers/12",
+                href: 'https://datastore/customers/12',
                 address: {
-                  href: "https://datastore/addresses/3"
+                  href: 'https://datastore/addresses/3'
                 },
                 contracts: [
                   {
-                    href: "https://datastore/contracts/2"
+                    href: 'https://datastore/contracts/2'
                   }
                 ]
               }
@@ -30,10 +30,12 @@ describe DHS::Record do
         endpoint 'https://datastore/customers'
         endpoint 'https://datastore/customers/{id}'
       end
+
       class Contract < DHS::Record
         endpoint 'https://datastore/contracts'
         endpoint 'https://datastore/contracts/{id}'
       end
+
       class Address < DHS::Record
         endpoint 'https://datastore/addresses'
         endpoint 'https://datastore/addresses/{id}', headers: { 'Authorization' => 'Bearer 123' }
@@ -50,7 +52,7 @@ describe DHS::Record do
 
     context 'interact with nested resouce remotely' do
       let(:address_request_stub) do
-        stub_request(:post, "https://datastore/addresses/3")
+        stub_request(:post, 'https://datastore/addresses/3')
           .with(
             body: {
               href: 'https://datastore/addresses/3',

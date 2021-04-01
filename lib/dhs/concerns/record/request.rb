@@ -250,7 +250,7 @@ class DHS::Record
       end
 
       def load_and_merge_sequential_requests!(record, data, options, next_link, pagination)
-        warn "[WARNING] You are loading all pages from a resource paginated with links only. As this is performed sequentially, it can result in very poor performance! (https://github.com/DePayFi/dhs#pagination-strategy-link)."
+        warn '[WARNING] You are loading all pages from a resource paginated with links only. As this is performed sequentially, it can result in very poor performance! (https://github.com/DePayFi/dhs#pagination-strategy-link).'
         while next_link.present?
           page_data = record.request(
             options.except(:all).merge(url: next_link)
@@ -570,7 +570,7 @@ class DHS::Record
       def url_option_for(item, key = nil)
         link = key ? item[key] : item
         return if link.blank?
-        return { url: link.href } if !link.collection?
+        return { url: link.href } unless link.collection?
 
         link.map do |item|
           { url: item.href } if item.present? && item.href.present?

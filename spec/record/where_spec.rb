@@ -36,7 +36,7 @@ describe DHS::Record do
 
       context 'chain initialization' do
         before do
-          stub_request(:get, "https://localch-accounts/?from_user_id=123")
+          stub_request(:get, 'https://localch-accounts/?from_user_id=123')
             .to_return(body: return_body)
         end
 
@@ -48,7 +48,7 @@ describe DHS::Record do
 
       context 'after chain initialization' do
         before do
-          stub_request(:get, "https://localch-accounts/?color=blue&from_user_id=123")
+          stub_request(:get, 'https://localch-accounts/?color=blue&from_user_id=123')
             .to_return(body: return_body)
         end
 

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe DHS::Data do
   let(:raw) do
-    { labels: { de: ['cat', 'dog'] } }
+    { labels: { de: %w[cat dog] } }
   end
 
   let(:data) do

@@ -31,10 +31,12 @@ describe DHS::Record do
         endpoint '{+datastore}/local-entries'
         endpoint '{+datastore}/local-entries/{id}'
       end
+
       class User < DHS::Record
         endpoint '{+datastore}/users'
         endpoint '{+datastore}/users/{id}'
       end
+
       class Favorite < DHS::Record
         endpoint '{+datastore}/favorites'
         endpoint '{+datastore}/favorites/{id}'
@@ -67,7 +69,7 @@ describe DHS::Record do
     end
 
     it 'includes an array of resources' do
-      favorite = Favorite.includes_first_page([:local_entry, :user]).find(1)
+      favorite = Favorite.includes_first_page(%i[local_entry user]).find(1)
       expect(favorite.local_entry.company_name).to eq 'depay.fi'
       expect(favorite.user.name).to eq 'Mario'
     end
@@ -117,7 +119,7 @@ describe DHS::Record do
           'campaign' => { 'href' => "#{datastore}/content-ads/51dfc5690cf271c375c5a12d" }
         }.to_json)
 
-      feedbacks = Feedback.includes_first_page(campaign: [:entry, :user]).find(123)
+      feedbacks = Feedback.includes_first_page(campaign: %i[entry user]).find(123)
       expect(feedbacks.campaign.entry.name).to eq 'Casa Ferlin'
       expect(feedbacks.campaign.user.name).to eq 'Mario'
     end
@@ -130,7 +132,7 @@ describe DHS::Record do
           'user' => { 'href' => "#{datastore}/users/lakj35asdflkj1203va" }
         }.to_json)
 
-      feedbacks = Feedback.includes_first_page(:user, campaign: [:entry, :user]).find(123)
+      feedbacks = Feedback.includes_first_page(:user, campaign: %i[entry user]).find(123)
       expect(feedbacks.campaign.entry.name).to eq 'Casa Ferlin'
       expect(feedbacks.campaign.user.name).to eq 'Mario'
       expect(feedbacks.user.name).to eq 'Mario'
@@ -201,8 +203,8 @@ describe DHS::Record do
                 'href' => "#{datastore}/local-parents/1",
                 'name' => 'RspecParent'
               }, {
-                'href'           => "#{datastore}/local-parents/2",
-                'name'           => 'RspecParent2',
+                'href' => "#{datastore}/local-parents/2",
+                'name' => 'RspecParent2',
                 'optional_child' => {
                   'href' => "#{datastore}/DePayFiildren/1"
                 }
@@ -266,7 +268,7 @@ describe DHS::Record do
           endpoint '{+datastore}/feedbacks'
         end
       end
-      stub_request(:get, "http://depay.fi/v2/feedbacks?id=123")
+      stub_request(:get, 'http://depay.fi/v2/feedbacks?id=123')
         .to_return(body: [].to_json)
     end
 
@@ -336,8 +338,8 @@ describe DHS::Record do
       stub_request(:get, "#{datastore}/place/1")
         .to_return(body: {
           'available_products' => {
-            "url" => "#{datastore}/place/1/products",
-            "items" => []
+            'url' => "#{datastore}/place/1/products",
+            'items' => []
           }
         }.to_json)
 
@@ -493,22 +495,22 @@ describe DHS::Record do
     end
 
     it 'forwards complex references' do
-      stub_request(:get, "http://datastore/places/123?limit=1&forwarded_params=for_place")
+      stub_request(:get, 'http://datastore/places/123?limit=1&forwarded_params=for_place')
         .to_return(body: {
           'contracts' => {
-            'href' => "http://datastore/places/123/contracts"
+            'href' => 'http://datastore/places/123/contracts'
           }
         }.to_json)
-      stub_request(:get, "http://datastore/places/123/contracts?forwarded_params=for_contracts")
+      stub_request(:get, 'http://datastore/places/123/contracts?forwarded_params=for_contracts')
         .to_return(body: {
-          href: "http://datastore/places/123/contracts?forwarded_params=for_contracts",
+          href: 'http://datastore/places/123/contracts?forwarded_params=for_contracts',
           items: [
-            { product: { 'href' => "http://datastore/products/llo" } }
+            { product: { 'href' => 'http://datastore/products/llo' } }
           ]
         }.to_json)
-      stub_request(:get, "http://datastore/products/llo?forwarded_params=for_product")
+      stub_request(:get, 'http://datastore/products/llo?forwarded_params=for_product')
         .to_return(body: {
-          'href' => "http://datastore/products/llo",
+          'href' => 'http://datastore/products/llo',
           'name' => 'Local Logo'
         }.to_json)
       place = Place
@@ -527,15 +529,15 @@ describe DHS::Record do
     end
 
     it 'expands empty arrays' do
-      stub_request(:get, "http://datastore/places/123")
+      stub_request(:get, 'http://datastore/places/123')
         .to_return(body: {
           'contracts' => {
-            'href' => "http://datastore/places/123/contracts"
+            'href' => 'http://datastore/places/123/contracts'
           }
         }.to_json)
-      stub_request(:get, "http://datastore/places/123/contracts")
+      stub_request(:get, 'http://datastore/places/123/contracts')
         .to_return(body: {
-          href: "http://datastore/places/123/contracts",
+          href: 'http://datastore/places/123/contracts',
           items: []
         }.to_json)
       place = Place.includes_first_page(:contracts).find('123')
@@ -560,8 +562,8 @@ describe DHS::Record do
         .to_return(body: {
           category_relations: [{ href: 'http://datastore/category/2' }, { href: 'http://datastore/category/1' }]
         }.to_json)
-      stub_request(:get, "http://datastore/category/1").to_return(body: { name: 'Food' }.to_json)
-      stub_request(:get, "http://datastore/category/2").to_return(body: { name: 'Drinks' }.to_json)
+      stub_request(:get, 'http://datastore/category/1').to_return(body: { name: 'Food' }.to_json)
+      stub_request(:get, 'http://datastore/category/2').to_return(body: { name: 'Drinks' }.to_json)
     end
 
     it 'includes and merges linked resources in case of an array of links' do
@@ -618,7 +620,6 @@ describe DHS::Record do
   end
 
   context 'include for POST/create' do
-
     before do
       class Record < DHS::Record
         endpoint 'https://records'
@@ -652,7 +653,7 @@ describe DHS::Record do
       class Place < DHS::Record
         endpoint 'https://places/{id}'
       end
-      stub_request(:get, "https://places/1")
+      stub_request(:get, 'https://places/1')
         .to_return(body: {
           customer: {
             salesforce: {
@@ -663,7 +664,7 @@ describe DHS::Record do
     end
 
     let!(:nested_request) do
-      stub_request(:get, "https://salesforce/customers/1")
+      stub_request(:get, 'https://salesforce/customers/1')
         .to_return(body: {
           name: 'Steve'
         }.to_json)
@@ -683,7 +684,7 @@ describe DHS::Record do
       end
 
       let!(:nested_request) do
-        stub_request(:get, "https://salesforce/customers/1")
+        stub_request(:get, 'https://salesforce/customers/1')
           .with(headers: { 'Authorization' => 'Bearer 123' })
           .to_return(body: {
             name: 'Steve'
@@ -703,7 +704,7 @@ describe DHS::Record do
       class Place < DHS::Record
         endpoint 'https://places/{id}'
       end
-      stub_request(:get, "https://places/1")
+      stub_request(:get, 'https://places/1')
         .to_return(body: {
           id: '123'
         }.to_json)
@@ -721,7 +722,7 @@ describe DHS::Record do
       class Place < DHS::Record
         endpoint 'https://places/{id}'
       end
-      stub_request(:get, "https://places/1")
+      stub_request(:get, 'https://places/1')
         .to_return(body: {
           id: '123',
           customer: {}

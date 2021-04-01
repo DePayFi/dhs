@@ -69,7 +69,7 @@ describe DHS::Item do
       end
 
       it 'updates data using custom setters before send to backend' do
-        stub_request(:post, "http://bookings/bookings")
+        stub_request(:post, 'http://bookings/bookings')
           .with(body: {
             id: 'abc',
             appointments: [1, 2, 3]
@@ -104,7 +104,7 @@ describe DHS::Item do
         end
 
         it 'updates data using custom setters before send to backend' do
-          stub_request(:post, "http://bookings/bookings")
+          stub_request(:post, 'http://bookings/bookings')
             .with(body: {
               appointments: [{ date_time: '2018-01-18' }]
             }.to_json)
@@ -125,10 +125,10 @@ describe DHS::Item do
 
       let(:data) do
         {
-          id: "aaa",
-          parent_id: "bbb",
+          id: 'aaa',
+          parent_id: 'bbb',
           child_id: 'ccc',
-          name: "Lorem"
+          name: 'Lorem'
         }
       end
 

@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'webrick'
 
 describe DHS::Record do
-
   before do
     class User < DHS::Record
       endpoint 'http://example.com/users'
@@ -18,7 +17,7 @@ describe DHS::Record do
 
   context 'explicit pagination parameters for retrieving pages' do
     it 'uses explicit parameters when retrieving pages' do
-      stub_request(:get, "http://example.com/users?limit=100")
+      stub_request(:get, 'http://example.com/users?limit=100')
         .to_return(body: {
           items: 100.times.map { |_| { name: WEBrick::Utils.random_string(10) } },
           limit: 100,

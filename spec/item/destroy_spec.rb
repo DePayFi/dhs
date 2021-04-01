@@ -79,10 +79,10 @@ describe DHS::Item do
           endpoint 'https://uberall/businesses/{id}'
         end
 
-        stub_request(:get, "https://uberall/businesses")
+        stub_request(:get, 'https://uberall/businesses')
           .to_return(body: business_collection.to_json)
 
-        stub_request(:delete, "https://uberall/businesses/12345")
+        stub_request(:delete, 'https://uberall/businesses/12345')
           .to_return(body: {
             status: 'SUCCESS',
             response: {

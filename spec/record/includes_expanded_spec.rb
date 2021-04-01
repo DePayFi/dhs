@@ -9,19 +9,19 @@ describe DHS::Record do
         endpoint 'http://records/{id}'
       end
 
-      stub_request(:get, "http://records/1")
+      stub_request(:get, 'http://records/1')
         .to_return(
           body: {
             car: { href: 'http://records/1/car' }
           }.to_json
         )
 
-      stub_request(:get, "http://records/1/car?color=blue&limit=100")
+      stub_request(:get, 'http://records/1/car?color=blue&limit=100')
         .to_return(
           body: { href: 'http://records/cars/1' }.to_json
         )
 
-      stub_request(:get, "http://records/cars/1?color=blue&limit=100")
+      stub_request(:get, 'http://records/cars/1?color=blue&limit=100')
         .to_return(
           body: { name: 'wrum wrum' }.to_json
         )

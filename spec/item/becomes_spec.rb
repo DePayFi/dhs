@@ -13,13 +13,13 @@ describe DHS::Item do
       endpoint 'http://sync/locations/{id}/sync'
     end
 
-    stub_request(:get, "http://sync/locations/1")
+    stub_request(:get, 'http://sync/locations/1')
       .to_return(body: {
         id: 1,
         name: 'depay'
       }.to_json)
 
-    stub_request(:post, "http://sync/locations/1/sync")
+    stub_request(:post, 'http://sync/locations/1/sync')
       .with(body: {
         name: 'depay'
       }.to_json)
@@ -27,7 +27,7 @@ describe DHS::Item do
   end
 
   context 'convert records from class A to class B' do
-    it "becomes a record of another class" do
+    it 'becomes a record of another class' do
       location = Location.find(1)
       synchronization = location.becomes(Synchronization)
       expect(synchronization).to be_kind_of(Synchronization)

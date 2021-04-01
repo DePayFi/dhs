@@ -33,7 +33,7 @@ describe DHS::Item do
             message: 'The property value is incomplete. It misses some data'
           }, {
             code: 'INCOMPLETE_PROPERTY_VALUE',
-            path: ['contract', 'entry_id'],
+            path: %w[contract entry_id],
             message: 'The property value is incomplete. It misses some data'
           }]
         }.to_json)
@@ -42,7 +42,7 @@ describe DHS::Item do
         ['This value is problematic', 'This value is problematic']
       )
       expect(record.warnings.codes['gender']).to eq(
-        ['UNSUPPORTED_PROPERTY_VALUE', 'INCOMPLETE_PROPERTY_VALUE']
+        %w[UNSUPPORTED_PROPERTY_VALUE INCOMPLETE_PROPERTY_VALUE]
       )
       expect(record.warnings.messages['contract.entry_id']).to eq(
         ['This value is problematic']

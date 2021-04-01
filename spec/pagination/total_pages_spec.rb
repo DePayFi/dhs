@@ -4,7 +4,6 @@ require 'rails_helper'
 
 describe DHS::Record do
   context 'pagination' do
-
     let(:page_1_json) do
       {
         items: [1, 2],

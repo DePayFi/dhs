@@ -3,18 +3,15 @@
 require 'rails_helper'
 
 describe DHS::Record do
-
   context 'tracing' do
     context 'with tracing enabled' do
-
       before do
         allow(DHS.config).to receive(:trace).and_return(true)
       end
 
       context 'with non-paginated methods' do
-
         let(:request) do
-          stub_request(:get, "https://records/3jg781")
+          stub_request(:get, 'https://records/3jg781')
             .to_return(status: 204)
         end
 
@@ -39,32 +36,31 @@ describe DHS::Record do
       end
 
       context 'with paginated method last' do
-
         before do
           class Place < DHS::Record
             endpoint 'http://datastore/places'
           end
 
-          stub_request(:get, "http://datastore/places?limit=1")
+          stub_request(:get, 'http://datastore/places?limit=1')
             .to_return(
               body: {
-                items:  [
+                items: [
                   { id: 'first-1', company_name: 'Localsearch AG' }
                 ],
-                total:  500,
-                limit:  1,
+                total: 500,
+                limit: 1,
                 offset: 0
               }.to_json
             )
 
-          stub_request(:get, "http://datastore/places?limit=1&offset=499")
+          stub_request(:get, 'http://datastore/places?limit=1&offset=499')
             .to_return(
               body: {
-                items:  [
+                items: [
                   { id: 'last-500', company_name: 'Curious GmbH' }
                 ],
-                total:  500,
-                limit:  1,
+                total: 500,
+                limit: 1,
                 offset: 0
               }.to_json
             )
@@ -84,7 +80,6 @@ describe DHS::Record do
 
     context 'tracing disabled (default)' do
       context 'non-paginated methods' do
-
         before do
           class Record < DHS::Record
             endpoint 'https://records'
@@ -111,26 +106,26 @@ describe DHS::Record do
             endpoint 'http://datastore/places'
           end
 
-          stub_request(:get, "http://datastore/places?limit=1")
+          stub_request(:get, 'http://datastore/places?limit=1')
             .to_return(
               body: {
-                items:  [
+                items: [
                   { id: 'first-1', company_name: 'Localsearch AG' }
                 ],
-                total:  500,
-                limit:  1,
+                total: 500,
+                limit: 1,
                 offset: 0
               }.to_json
             )
 
-          stub_request(:get, "http://datastore/places?limit=1&offset=499")
+          stub_request(:get, 'http://datastore/places?limit=1&offset=499')
             .to_return(
               body: {
-                items:  [
+                items: [
                   { id: 'last-500', company_name: 'Curious GmbH' }
                 ],
-                total:  500,
-                limit:  1,
+                total: 500,
+                limit: 1,
                 offset: 0
               }.to_json
             )

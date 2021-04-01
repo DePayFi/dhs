@@ -4,7 +4,6 @@ require 'spec_helper'
 require 'dhs'
 
 describe DHS::Item do
-
   before do
     class Record < DHS::Record
       endpoint 'http://datastore/v2/records'
@@ -12,9 +11,8 @@ describe DHS::Item do
   end
 
   context 'requires active support when dealing with Item' do
-
-    it "does not raise an error" do
-      stub_request(:get, "http://datastore/v2/records?color=blue")
+    it 'does not raise an error' do
+      stub_request(:get, 'http://datastore/v2/records?color=blue')
         .to_return(
           body: {
             items: [{ name: 'Steve' }]

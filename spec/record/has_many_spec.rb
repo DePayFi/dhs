@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe DHS::Record do
-
   let(:listing) { location.listings.first }
 
   before do
@@ -16,7 +15,6 @@ describe DHS::Record do
   end
 
   context 'has_many' do
-
     before do
       class Location < DHS::Record
         endpoint 'http://uberall/locations'
@@ -97,14 +95,14 @@ describe DHS::Record do
         endpoint 'http://categories/categories/{id}'
       end
 
-      stub_request(:get, "http://places/places/1")
+      stub_request(:get, 'http://places/places/1')
         .to_return(body: {
           categories: [{
             href: 'https://categories/categories/1'
           }]
         }.to_json)
 
-      stub_request(:get, "https://categories/categories/1")
+      stub_request(:get, 'https://categories/categories/1')
         .to_return(body: {
           href: 'https://categories/categories/1',
           category_name: 'Pizza'

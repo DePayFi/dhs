@@ -45,7 +45,6 @@ describe DHS::OptionBlocks do
   end
 
   context 'parallel requests' do
-
     it 'does not fail merging option blocks for parallel requests' do
       DHS.options(headers: { 'Tracking-Id': 1 }) do
         Record.find(1234, 1234)

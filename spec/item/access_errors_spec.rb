@@ -3,9 +3,7 @@
 require 'rails_helper'
 
 describe DHS::Item do
-
   context 'make errors available' do
-
     before do
       class Presence < DHS::Record
         endpoint 'http://opm/presences'
@@ -15,14 +13,14 @@ describe DHS::Item do
     let(:place_href) { 'http://datastore/places/1' }
 
     it 'makes errors available no matter the response code' do
-      stub_request(:post, "http://opm/presences")
+      stub_request(:post, 'http://opm/presences')
         .to_return(
           status: 200,
           body: {
             place: { href: place_href },
             field_errors: [{
               code: 'REQUIRED_PROPERTY_VALUE',
-              path: ['place', 'opening_hours']
+              path: %w[place opening_hours]
             }]
           }.to_json
         )

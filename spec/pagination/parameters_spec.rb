@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'webrick'
 
 describe DHS::Record do
-
   before do
     class Location < DHS::Record
       endpoint 'http://uberall/locations'
@@ -19,9 +18,8 @@ describe DHS::Record do
   end
 
   context 'explicit pagination parameters for retrieving pages' do
-
     it 'uses explicit parameters when retrieving pages' do
-      stub_request(:get, "http://uberall/locations?max=100")
+      stub_request(:get, 'http://uberall/locations?max=100')
         .to_return(body: {
           response: {
             locations: 10.times.map { |_| { name: WEBrick::Utils.random_string(10) } },
@@ -31,7 +29,7 @@ describe DHS::Record do
           }
         }.to_json)
 
-      stub_request(:get, "http://uberall/locations?max=10&offset=10")
+      stub_request(:get, 'http://uberall/locations?max=10&offset=10')
         .to_return(body: {
           response: {
             locations: 10.times.map { |_| { name: WEBrick::Utils.random_string(10) } },
@@ -41,7 +39,7 @@ describe DHS::Record do
           }
         }.to_json)
 
-      stub_request(:get, "http://uberall/locations?max=10&offset=20")
+      stub_request(:get, 'http://uberall/locations?max=10&offset=20')
         .to_return(body: {
           response: {
             locations: 10.times.map { |_| { name: WEBrick::Utils.random_string(10) } },

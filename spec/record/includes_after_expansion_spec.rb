@@ -4,7 +4,6 @@ require 'rails_helper'
 
 describe DHS::Record do
   context 'includes records after expansion' do
-
     before do
       class User < DHS::Record
         endpoint 'http://users/{id}'
@@ -44,7 +43,7 @@ describe DHS::Record do
         .to_return(
           body: {
             contracts: {
-              href: "http://places/345/contracts?offset=0&limit=10"
+              href: 'http://places/345/contracts?offset=0&limit=10'
             }
           }.to_json
         )
@@ -59,7 +58,6 @@ describe DHS::Record do
             ]
           }.to_json
         )
-
     end
 
     it 'includes resources after expanding plain links' do

@@ -33,7 +33,7 @@ describe DHS::Item do
 
     it 'considers end point options when saving' do
       data = { name: 'Steve' }
-      stub_request(:post, "http://datastore/records")
+      stub_request(:post, 'http://datastore/records')
         .with(body: data.to_json, headers: headers)
         .to_return(body: data.to_json)
       RecordWithOptions.create!(data)
@@ -73,9 +73,9 @@ describe DHS::Item do
 
     let(:data) do
       {
-        parent_id: "bbb",
+        parent_id: 'bbb',
         child_id: 'ccc',
-        name: "Lorem"
+        name: 'Lorem'
       }
     end
 
@@ -85,7 +85,7 @@ describe DHS::Item do
 
     it 'persists changes on the backend' do
       stub_request(:post, 'http://host/v2/parents/bbb/children/ccc/grand_children')
-        .with(body: { name: "Lorem" }.to_json)
+        .with(body: { name: 'Lorem' }.to_json)
 
       expect(item.save).to eq true
     end

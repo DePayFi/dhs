@@ -5,11 +5,11 @@ require 'dhc/rspec'
 
 describe 'Request Cycle Cache', type: :request do
   let!(:request) do
-    stub_request(:get, "http://datastore/v2/users/1").to_return(body: { name: 'Steve' }.to_json)
+    stub_request(:get, 'http://datastore/v2/users/1').to_return(body: { name: 'Steve' }.to_json)
   end
 
   let!(:second_request) do
-    stub_request(:get, "http://datastore/v2/users/2").to_return(body: { name: 'Peter' }.to_json)
+    stub_request(:get, 'http://datastore/v2/users/2').to_return(body: { name: 'Peter' }.to_json)
   end
 
   before do

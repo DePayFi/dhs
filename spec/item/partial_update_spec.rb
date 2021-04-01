@@ -63,10 +63,10 @@ describe DHS::Item do
 
     let(:data) do
       {
-        id: "aaa",
-        parent_id: "bbb",
+        id: 'aaa',
+        parent_id: 'bbb',
         child_id: 'ccc',
-        name: "Lorem"
+        name: 'Lorem'
       }
     end
 
@@ -105,7 +105,6 @@ describe DHS::Item do
   end
 
   context 'records without hrefs and nested items' do
-
     before do
       class Location < DHS::Record
         endpoint 'http://uberall/locations'
@@ -114,8 +113,8 @@ describe DHS::Item do
     end
 
     it 'finds and compiles existing endpoints to determine update url' do
-      stub_request(:get, "http://uberall/locations/1").to_return(body: { id: 1 }.to_json)
-      stub_request(:post, "http://uberall/locations/1").to_return(body: { id: 1, listings: [{ directory: 'facebook' }] }.to_json)
+      stub_request(:get, 'http://uberall/locations/1').to_return(body: { id: 1 }.to_json)
+      stub_request(:post, 'http://uberall/locations/1').to_return(body: { id: 1, listings: [{ directory: 'facebook' }] }.to_json)
       location = Location.find(1)
       location.partial_update(autoSync: true)
       expect(location.autoSync).to eq true
@@ -123,18 +122,17 @@ describe DHS::Item do
     end
 
     context 'records with nested items' do
-
       before do
         class Location < DHS::Record
           endpoint 'http://uberall/locations'
           endpoint 'http://uberall/locations/{id}'
-          configuration item_created_key: [:response, :location], item_key: [:response, :location]
+          configuration item_created_key: %i[response location], item_key: %i[response location]
         end
       end
 
       it 'finds and compiles existing endpoints to determine update url' do
-        stub_request(:get, "http://uberall/locations/1").to_return(body: { response: { location: { id: 1 } } }.to_json)
-        stub_request(:post, "http://uberall/locations/1").to_return(body: { response: { location: { id: 1, listings: [{ directory: 'facebook' }] } } }.to_json)
+        stub_request(:get, 'http://uberall/locations/1').to_return(body: { response: { location: { id: 1 } } }.to_json)
+        stub_request(:post, 'http://uberall/locations/1').to_return(body: { response: { location: { id: 1, listings: [{ directory: 'facebook' }] } } }.to_json)
         location = Location.find(1)
         location.partial_update(autoSync: true)
         expect(location.autoSync).to eq true
@@ -142,8 +140,8 @@ describe DHS::Item do
       end
 
       it 'use given update http method' do
-        stub_request(:get, "http://uberall/locations/1").to_return(body: { response: { location: { id: 1 } } }.to_json)
-        stub_request(:patch, "http://uberall/locations/1").to_return(body: { response: { location: { id: 1, listings: [{ directory: 'facebook' }] } } }.to_json)
+        stub_request(:get, 'http://uberall/locations/1').to_return(body: { response: { location: { id: 1 } } }.to_json)
+        stub_request(:patch, 'http://uberall/locations/1').to_return(body: { response: { location: { id: 1, listings: [{ directory: 'facebook' }] } } }.to_json)
         location = Location.find(1)
         location.partial_update({ autoSync: true }, { method: :patch })
         expect(location.autoSync).to eq true

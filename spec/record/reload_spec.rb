@@ -16,8 +16,8 @@ describe DHS::Record do
 
   context 'reload!' do
     it 'returns an instance of the record, not an DHS::Item' do
-      stub_request(:post, "http://datastore/records").to_return(body: json)
-      stub_request(:get, "http://datastore/records/1").to_return(body: json)
+      stub_request(:post, 'http://datastore/records').to_return(body: json)
+      stub_request(:get, 'http://datastore/records/1').to_return(body: json)
       record = Record.create!(name: 'Steve')
       expect(record).to be_kind_of Record
       expect(record.reload!).to be_kind_of Record
@@ -25,18 +25,17 @@ describe DHS::Record do
   end
 
   context 'nested items' do
-
     before do
       class Location < DHS::Record
         endpoint 'http://uberall/locations'
         endpoint 'http://uberall/locations/{id}'
 
-        configuration item_key: [:response, :location], items_key: [:response, :locations]
+        configuration item_key: %i[response location], items_key: %i[response locations]
       end
     end
 
     it 'merges reloads properly' do
-      stub_request(:get, "http://uberall/locations?identifier=http://places/1&limit=1")
+      stub_request(:get, 'http://uberall/locations?identifier=http://places/1&limit=1')
         .to_return(
           body: {
             response: {
@@ -48,7 +47,7 @@ describe DHS::Record do
           }.to_json
         )
       location = Location.find_by(identifier: 'http://places/1')
-      stub_request(:get, "http://uberall/locations/1")
+      stub_request(:get, 'http://uberall/locations/1')
         .to_return(
           body: {
             response: {

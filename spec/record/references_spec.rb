@@ -19,13 +19,13 @@ describe DHS::Record do
     end
 
     let!(:customer_request) do
-      stub_request(:get, "http://datastore/customers/1")
+      stub_request(:get, 'http://datastore/customers/1')
         .to_return(body: {
           'electronic_addresses' => {
-            'href' => "http://datastore/electronic_addresses"
+            'href' => 'http://datastore/electronic_addresses'
           },
           'contact_addresses' => {
-            'href' => "http://datastore/contact_addresses"
+            'href' => 'http://datastore/contact_addresses'
           },
           'users' => {
             'href' => 'http://datastore/customers/1/users'
@@ -34,13 +34,13 @@ describe DHS::Record do
     end
 
     let!(:electronic_addresses_request) do
-      stub_request(:get, "http://datastore/electronic_addresses")
+      stub_request(:get, 'http://datastore/electronic_addresses')
         .with(referencing_options)
         .to_return(body: [].to_json)
     end
 
     let!(:contact_addresses_request) do
-      stub_request(:get, "http://datastore/contact_addresses")
+      stub_request(:get, 'http://datastore/contact_addresses')
         .with(referencing_options)
         .to_return(body: [].to_json)
     end
@@ -91,6 +91,5 @@ describe DHS::Record do
         expect(users.first.reversed_name).to be_present
       end
     end
-
   end
 end

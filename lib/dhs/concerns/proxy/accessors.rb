@@ -8,7 +8,7 @@ class DHS::Proxy
 
     # Keywords that would not be forwarded via method missing
     # FIXME: Extend the set of keywords
-    BLACKLISTED_KEYWORDS = %w(new proxy_association)
+    BLACKLISTED_KEYWORDS = %w(new proxy_association).freeze
 
     delegate :dig, :fetch, to: :_raw, allow_nil: true
 

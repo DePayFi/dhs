@@ -12,7 +12,7 @@ describe DHS::Collection do
     class Account < DHS::Record
       endpoint '{+datastore}/accounts'
     end
-    stub_request(:get, "http://depay.fi/v2/accounts")
+    stub_request(:get, 'http://depay.fi/v2/accounts')
       .to_return(body: response_data.to_json)
   end
 

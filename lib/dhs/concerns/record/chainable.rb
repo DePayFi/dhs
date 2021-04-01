@@ -144,7 +144,7 @@ class DHS::Record
       # Clone is required to have immutable
       excluded_methods += [:clone]
       # We are asked from ruby to not delegate __send__ and object_id
-      excluded_methods += [:__send__, :object_id]
+      excluded_methods += %i[__send__ object_id]
       delegated_methods = Object.instance_methods - excluded_methods
       delegate(*delegated_methods, to: :resolve)
 

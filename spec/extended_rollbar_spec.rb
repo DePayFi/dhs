@@ -4,15 +4,15 @@ require 'rails_helper'
 
 describe 'Extended Rollbar', type: :request do
   let!(:records_request_1) do
-    stub_request(:get, "http://datastore/v2/records?color=blue").to_return(body: ['blue'].to_json)
+    stub_request(:get, 'http://datastore/v2/records?color=blue').to_return(body: ['blue'].to_json)
   end
 
   let!(:records_request_2) do
-    stub_request(:get, "http://datastore/v2/records?color=red").to_return(body: ['red'].to_json)
+    stub_request(:get, 'http://datastore/v2/records?color=red').to_return(body: ['red'].to_json)
   end
 
   let!(:rollbar_request) do
-    stub_request(:post, "https://api.rollbar.com/api/1/item/")
+    stub_request(:post, 'https://api.rollbar.com/api/1/item/')
       .with do |request|
         json = JSON.parse request.body
         message = "Let's see if rollbar logs information about what kind of requests where made around here!"

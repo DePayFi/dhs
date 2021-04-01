@@ -8,14 +8,14 @@ class DHS::Complex
   attr_reader :data
 
   def reduce!(data)
-    if data.is_a?(DHS::Complex)
-      @data = data.data
+    @data = if data.is_a?(DHS::Complex)
+      data.data
     elsif data.is_a?(Array) && !data.empty?
-      @data = data.inject(DHS::Complex.new.reduce!([])) { |acc, datum| acc.merge!(DHS::Complex.new.reduce!(datum)) }.data
+      data.inject(DHS::Complex.new.reduce!([])) { |acc, datum| acc.merge!(DHS::Complex.new.reduce!(datum)) }.data
     elsif data.is_a?(Hash) && !data.empty?
-      @data = data.map { |k, v| [k, DHS::Complex.new.reduce!(v)] }.to_h
+      data.map { |k, v| [k, DHS::Complex.new.reduce!(v)] }.to_h
     else
-      @data = data
+      data
     end
 
     self
@@ -83,7 +83,7 @@ class DHS::Complex
       data.each do |element|
         if element.data.is_a?(Symbol)
           # remove keys that were in the hash
-          new_data << element if !other.data.key?(element.data)
+          new_data << element unless other.data.key?(element.data)
         elsif element.data.is_a?(Array)
           new_data << element
         elsif element.data.is_a?(Hash)
@@ -120,10 +120,10 @@ class DHS::Complex
 
   def merge_hash_into_hash!(other)
     other.data.each do |k, v|
-      if data.key?(k)
-        data[k] = data[k].merge!(v)
+      data[k] = if data.key?(k)
+        data[k].merge!(v)
       else
-        data[k] = v
+        v
       end
     end
   end
@@ -149,10 +149,10 @@ class DHS::Complex
   end
 
   def merge_hash_into_symbol!(other)
-    if other.data.key?(data)
-      @data = other.data
+    @data = if other.data.key?(data)
+      other.data
     else
-      @data = [DHS::Complex.new.reduce!(data), other]
+      [DHS::Complex.new.reduce!(data), other]
     end
   end
 end

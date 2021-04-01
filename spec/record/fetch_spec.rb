@@ -10,10 +10,9 @@ describe DHS::Record do
   end
 
   context 'fetch' do
-
     context 'to resolve the chain' do
       let!(:request_stub) do
-        stub_request(:get, "http://datastore/records/?available=true&color=blue&range=%3E26")
+        stub_request(:get, 'http://datastore/records/?available=true&color=blue&range=%3E26')
           .to_return(body: [{
             name: 'Steve'
           }].to_json)
@@ -28,7 +27,7 @@ describe DHS::Record do
 
     context 'to fetch the first response' do
       let!(:request_stub) do
-        stub_request(:get, "http://datastore/records/")
+        stub_request(:get, 'http://datastore/records/')
           .to_return(body: [{ name: 'Steve' }])
       end
 

@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require 'rails_helper'
 
 describe DHS, type: :request do
   context 'autoloading' do
-
     let(:endpoints) { DHS::Record::Endpoints.all }
 
     it "pre/re-loads all DHS classes initialy, because it's necessary for endpoint-to-record-class-discovery", reset_before: false do
-
       expect(endpoints['http://datastore/v2/users']).to be_present
       expect(endpoints['http://datastore/v2/users/{id}']).to be_present
 
@@ -21,7 +19,6 @@ describe DHS, type: :request do
     end
 
     it "also pre/re-loads all DHS classes that inherited from an DHS provider, because it's necessary for endpoint-to-record-class-discovery", reset_before: false do
-
       expect(endpoints['http://customers']).to be_present
       expect(endpoints['http://customers/{id}']).to be_present
 
@@ -32,7 +29,7 @@ describe DHS, type: :request do
         DummyCustomer.endpoints.detect { |endpoint| endpoint.url == 'http://customers/{id}' }
       ).to be_present
 
-      customer_request = stub_request(:get, "http://customers/1")
+      customer_request = stub_request(:get, 'http://customers/1')
         .with(
           headers: {
             'Authorization' => 'token123'

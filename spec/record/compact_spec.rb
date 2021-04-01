@@ -54,7 +54,6 @@ describe DHS::Record do
           message: 'The requested resource does not exist.'
         }.to_json
       )
-
   end
 
   let(:places) do
@@ -66,7 +65,6 @@ describe DHS::Record do
   end
 
   context '.compact' do
-
     it 'does NOT return an internal data type, but the Record class' do
       expect(places.compact.class).to eq User
     end

@@ -9,17 +9,18 @@ describe DHS::Record do
     class Record < DHS::Record
       endpoint 'http://depay.fi/v2/records/{id}'
     end
+
     class NestedRecord < DHS::Record
       endpoint 'http://depay.fi/v2/other_records/{id}'
     end
-    stub_request(:get, "http://depay.fi/v2/records/1")
+    stub_request(:get, 'http://depay.fi/v2/records/1')
       .to_return(body: {
         href: 'http://depay.fi/v2/records/1',
         other: {
           href: 'http://depay.fi/v2/other_records/2'
         }
       }.to_json)
-    stub_request(:get, "http://depay.fi/v2/other_records/2")
+    stub_request(:get, 'http://depay.fi/v2/other_records/2')
       .to_return(status: 404)
   end
 
