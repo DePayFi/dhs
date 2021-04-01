@@ -12,7 +12,7 @@ end
 
 class DHS::Record
 
-  DESCENDANTS = [].freeze
+  DESCENDANTS = []
 
   def self.inherited(child)
     DESCENDANTS.push(child)
