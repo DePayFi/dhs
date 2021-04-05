@@ -22,17 +22,18 @@ class DHS::Record
       def find_in_batches(options = {})
         raise 'No block given' unless block_given?
         options = options.dup
-        start = options.delete(:start) || 1
-        batch_size = options.delete(:batch_size) || DHS::Pagination::Base::DEFAULT_LIMIT
+        start = options[:start] || self.pagination_class::DEFAULT_OFFSET
+        batch_size = options.delete(:batch_size) || self.pagination_class::DEFAULT_LIMIT
         loop do # as suggested by Matz
           options = options.dup
           options[:params] = (options[:params] || {}).merge(limit_key(:parameter) => batch_size, pagination_key(:parameter) => start)
           data = request(options)
-          batch_size = data._raw.dig(*limit_key(:body))
-          left = data._raw.dig(*total_key).to_i - data._raw.dig(*pagination_key(:body)).to_i - data._raw.dig(*limit_key(:body)).to_i
+          pagination = self.pagination(data)
+          batch_size = pagination.limit
+          left = pagination.pages_left
           yield new(data)
           break if left <= 0
-          start += batch_size
+          start = pagination.next_offset
         end
       end
     end
