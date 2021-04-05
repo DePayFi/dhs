@@ -29,11 +29,11 @@ describe DHS::Collection do
 
   context 'find_each' do
     it 'processes each record by fetching records in batches' do
-      stub_request(:get, "#{datastore}/feedbacks?limit=100&offset=1").to_return(status: 200, body: api_response((1..100).to_a, 1))
-      stub_request(:get, "#{datastore}/feedbacks?limit=100&offset=101").to_return(status: 200, body: api_response((101..200).to_a, 101))
-      stub_request(:get, "#{datastore}/feedbacks?limit=100&offset=201").to_return(status: 200, body: api_response((201..300).to_a, 201))
-      stub_request(:get, "#{datastore}/feedbacks?limit=100&offset=301").to_return(status: 200, body: api_response((301..400).to_a, 301))
-      stub_request(:get, "#{datastore}/feedbacks?limit=100&offset=401").to_return(status: 200, body: api_response((401..total).to_a, 401))
+      stub_request(:get, "#{datastore}/feedbacks?limit=100&offset=0").to_return(status: 200, body: api_response((1..100).to_a, 0))
+      stub_request(:get, "#{datastore}/feedbacks?limit=100&offset=100").to_return(status: 200, body: api_response((101..200).to_a, 100))
+      stub_request(:get, "#{datastore}/feedbacks?limit=100&offset=200").to_return(status: 200, body: api_response((201..300).to_a, 200))
+      stub_request(:get, "#{datastore}/feedbacks?limit=100&offset=300").to_return(status: 200, body: api_response((301..400).to_a, 300))
+      stub_request(:get, "#{datastore}/feedbacks?limit=100&offset=400").to_return(status: 200, body: api_response((401..total).to_a, 400))
       count = 0
       Record.find_each do |record|
         count += 1
@@ -45,7 +45,7 @@ describe DHS::Collection do
     end
 
     it 'passes options to the requests made' do
-      request = stub_request(:get, 'http://depay.fi/v2/feedbacks?limit=100&offset=1')
+      request = stub_request(:get, 'http://depay.fi/v2/feedbacks?limit=100&offset=0')
         .with(headers: { 'Authorization' => 'Bearer 123' })
         .to_return(body: {
           items: []
