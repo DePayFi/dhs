@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DHS
   class Railtie < Rails::Railtie
 
@@ -27,6 +29,6 @@ module DHS
         DHS::Interceptors::ExtendedRollbar::ThreadRegistry.log = []
       end
     end
-    
+
   end
 end

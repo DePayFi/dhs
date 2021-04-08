@@ -19,7 +19,7 @@ module AutoloadRecords
 
       class Middleware
 
-        MODEL_FILES = 'app/models/**/*.rb'.freeze
+        MODEL_FILES = 'app/models/**/*.rb'
 
         def initialize(app)
           @app = app
@@ -29,7 +29,6 @@ module AutoloadRecords
           self.class.require_records
           @app.call(env)
         end
-
 
         def self.require_direct_inheritance
           Rails.application.reloader.to_prepare do
