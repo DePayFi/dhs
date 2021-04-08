@@ -3,31 +3,8 @@
 module DHS
   class Railtie < Rails::Railtie
     initializer 'dhs.hook_into_controller_initialization' do
-      class ActionController::Base
-
-        def initialize
-          prepare_dhs_request_cycle_cache
-          reset_option_blocks
-          reset_extended_rollbar_request_logs
-          super
-        end
-
-        private
-
-        def prepare_dhs_request_cycle_cache
-          return unless DHS.config.request_cycle_cache_enabled
-          DHS::Interceptors::RequestCycleCache::ThreadRegistry.request_id = [Time.now.to_f, request.object_id].join('#')
-        end
-
-        def reset_option_blocks
-          DHS::OptionBlocks::CurrentOptionBlock.options = nil
-        end
-
-        def reset_extended_rollbar_request_logs
-          return unless defined?(::Rollbar)
-          return unless DHC.config.interceptors.include?(DHS::Interceptors::ExtendedRollbar::Interceptor)
-          DHS::Interceptors::ExtendedRollbar::ThreadRegistry.log = []
-        end
+      Rails.application.reloader.to_prepare do
+        require_relative 'railtie/action_controller_extension'
       end
     end
   end

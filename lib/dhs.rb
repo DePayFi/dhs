@@ -58,10 +58,12 @@ module DHS
   autoload :Unprocessable, 'dhs/unprocessable'
 
   include Configuration
-  include AutoloadRecords if defined?(Rails)
   include OptionBlocks
 
   require 'dhs/record' # as dhs records in an application are directly inheriting it
 
-  require 'dhs/railtie' if defined?(Rails)
+  if defined?(Rails)
+    include AutoloadRecords
+    require 'dhs/railtie'
+  end
 end
