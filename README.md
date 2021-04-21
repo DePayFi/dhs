@@ -1131,6 +1131,40 @@ In parallel:
   GET https://service.example.com/records?limit=100&page=3
 ```
 
+##### Pagination strategy: offset_page
+
+The `offest_page` strategy is based on the `page` strategy with the only difference
+that the pages are counted from 0 onwards (not from 1).
+
+```ruby
+# app/models/transaction.rb
+
+class Transaction < DHS::Record
+  configuration pagination_strategy: 'offset_page', pagination_key: 'page'
+
+  endpoint '{+service}/transactions'
+end
+```
+
+```ruby
+# app/controllers/some_controller.rb
+
+Record.all
+
+```
+```
+GET https://service.example.com/records?limit=100
+{
+  items: [{...}, ...],
+  total: 300,
+  limit: 100,
+  page: 0
+}
+In parallel:
+  GET https://service.example.com/records?limit=100&page=1
+  GET https://service.example.com/records?limit=100&page=2
+```
+
 ##### Pagination strategy: total_pages
 
 The `total_pages` strategy is based on the `page` strategy with the only difference
@@ -1164,7 +1198,6 @@ In parallel:
   GET https://service.example.com/records?limit=100&page=2
   GET https://service.example.com/records?limit=100&page=3
 ```
-
 
 ##### Pagination strategy: start
 
