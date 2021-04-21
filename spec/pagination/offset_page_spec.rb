@@ -4,9 +4,8 @@ require 'rails_helper'
 
 describe DHS::Record do
   context 'pagination' do
-
-    def stub_api_request(items:[], page: nil)
-      stub_request(:get, ["http://depay.fi/v2/transactions?limit=100", page].compact.join('&page='))
+    def stub_api_request(items: [], page: nil)
+      stub_request(:get, ['http://depay.fi/v2/transactions?limit=100', page].compact.join('&page='))
         .to_return(body: { items: items }.to_json)
     end
 
@@ -20,7 +19,7 @@ describe DHS::Record do
     before do
       class Transaction < DHS::Record
         configuration pagination_strategy: :offset_page, pagination_key: :page
-        
+
         endpoint 'http://depay.fi/v2/transactions'
       end
     end
