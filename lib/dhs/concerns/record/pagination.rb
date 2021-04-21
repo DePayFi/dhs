@@ -24,6 +24,8 @@ class DHS::Record
           DHS::Pagination::Page
         when :total_pages
           DHS::Pagination::TotalPages
+        when :offset_page
+          DHS::Pagination::OffsetPage
         when :start
           DHS::Pagination::Start
         when :link
