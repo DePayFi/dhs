@@ -3,9 +3,7 @@
 require 'rails_helper'
 
 describe DHS::Record do
-
   context 'order in where chains' do
-
     before do
       class Record < DHS::Record
         endpoint 'http://records'
@@ -14,7 +12,7 @@ describe DHS::Record do
 
     context 'single parameter for order' do
       before do
-        stub_request(:get, "http://records/?color=blue&order[created_at]=desc")
+        stub_request(:get, 'http://records/?color=blue&order[created_at]=desc')
           .to_return(body: [{ name: 'ordered by created_at desc' }].to_json)
       end
 
@@ -26,7 +24,7 @@ describe DHS::Record do
 
     context 'multiple parameters for order' do
       before do
-        stub_request(:get, "http://records/?color=blue&order[name]=asc&order[created_at]=desc")
+        stub_request(:get, 'http://records/?color=blue&order[name]=asc&order[created_at]=desc')
           .to_return(body: [{ name: 'ordered by name asc (implicitly) and created_at desc (explicitly)' }].to_json)
       end
 
