@@ -222,6 +222,20 @@ class DHS::Record
         end
       end
 
+      def order(*args)
+        order_params = {}
+        args.each do |arg|
+          if arg.is_a?(Hash)
+            arg.each do |key, value|
+              order_params[key] = value
+            end
+          else
+            order_params[arg.to_s] = 'asc'
+          end
+        end
+        push(Parameter.new(order: order_params))
+      end
+
       def all(hash = nil)
         push([Parameter.new(hash), Option.new(all: true)])
       end

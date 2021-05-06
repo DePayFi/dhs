@@ -305,6 +305,20 @@ records = Record.blue.available(true)
 GET https://service.example.com/records?color=blue&available=true
 ```
 
+#### order
+
+Set the expected order of things using `.order`
+
+```ruby
+# app/controllers/some_controller.rb
+
+Record.where(color: 'blue').order(:name, { created_at: :desc })
+
+```
+```
+  GET https://service.example.com/records?color=blue&order[name]=asc&order[created_at]=desc
+```
+
 #### all
 
 You can fetch all remote records by using `all`. Pagination will be performed automatically (See: [Record pagination](#record-pagination))
