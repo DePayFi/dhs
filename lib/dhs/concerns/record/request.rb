@@ -469,11 +469,25 @@ class DHS::Record
         options = (provider_options || {})
           .deep_merge(endpoint.options || {})
           .deep_merge(options)
+        set_graphql_options!(options) if options.dig(:graphql).present?
         options[:url] = compute_url!(options[:params]) unless options.key?(:url)
         merge_explicit_params!(options[:params])
         options.delete(:params) if options[:params]&.empty?
         inject_interceptors!(options)
         options
+      end
+
+      def set_graphql_options!(options)
+        options[:method] = :post
+        variables = {}
+        options.dig(:graphql, :variables).each do |key|
+          variables[key] = options[:params][key]
+          options[:params].delete(key)
+        end
+        options[:body] = {
+          query: options.dig(:graphql, :query).squish,
+          variables: variables.to_json
+        }
       end
 
       def inject_interceptors!(options)
