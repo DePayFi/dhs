@@ -3,15 +3,14 @@
 require 'rails_helper'
 
 describe 'main graphql support' do
-
   let(:network) { 'ethereum' }
   let(:address) { '0x317D875cA3B9f8d14f960486C0d1D1913be74e90' }
 
   let!(:stubbed_request) do
-    stub_request(:post, "https://graphql.bitquery.io/")
+    stub_request(:post, 'https://graphql.bitquery.io/')
     .with(
       body: {
-        query: %Q{
+        query: %{
           query ($network: EthereumNetwork!, $address: String!) {
             ethereum(network: $network) {
               address(address: {is: $address}) {
@@ -42,45 +41,45 @@ describe 'main graphql support' do
               balances: [
                 {
                   "currency": {
-                    "address": "-",
-                    "name": "Ether",
+                    "address": '-',
+                    "name": 'Ether',
                     "decimals": 18,
-                    "symbol": "ETH",
-                    "tokenType": ""
+                    "symbol": 'ETH',
+                    "tokenType": ''
                   },
                   "value": 0.11741978
                 },
                 {
                   "currency": {
-                    "address": "0xb63b606ac810a52cca15e44bb630fd42d8d1d83d",
-                    "name": "Monaco",
+                    "address": '0xb63b606ac810a52cca15e44bb630fd42d8d1d83d',
+                    "name": 'Monaco',
                     "decimals": 8,
-                    "symbol": "MCO",
-                    "tokenType": "ERC20"
+                    "symbol": 'MCO',
+                    "tokenType": 'ERC20'
                   },
                   "value": 0
                 },
                 {
                   "currency": {
-                    "address": "0x06012c8cf97bead5deae237070f9587f8e7a266d",
-                    "name": "CryptoKitties",
+                    "address": '0x06012c8cf97bead5deae237070f9587f8e7a266d',
+                    "name": 'CryptoKitties',
                     "decimals": 0,
-                    "symbol": "CK",
-                    "tokenType": "ERC721"
+                    "symbol": 'CK',
+                    "tokenType": 'ERC721'
                   },
                   "value": 90
                 },
                 {
                   "currency": {
-                    "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-                    "name": "Tether USD",
+                    "address": '0xdac17f958d2ee523a2206206994597c13d831ec7',
+                    "name": 'Tether USD',
                     "decimals": 6,
-                    "symbol": "USDT",
-                    "tokenType": "ERC20"
+                    "symbol": 'USDT',
+                    "tokenType": 'ERC20'
                   },
                   "value": 10
-                },
-              ]   
+                }
+              ]
             }
           ]
         }
@@ -90,12 +89,12 @@ describe 'main graphql support' do
 
   before do
     class Record < DHS::Record
-      
+
       configuration items_key: [:data, :ethereum, :address, 0, :balances]
 
       endpoint 'https://graphql.bitquery.io/',
         graphql: {
-          query: %Q{
+          query: %{
             query ($network: EthereumNetwork!, $address: String!) {
               ethereum(network: $network) {
                 address(address: {is: $address}) {
@@ -113,7 +112,7 @@ describe 'main graphql support' do
               }
             }
           },
-          variables: [:network, :address]
+          variables: %i[network address]
         }
     end
   end
