@@ -155,6 +155,107 @@ GET https://service.example.com/records
 
 **Be aware that, if you configure ambigious endpoints accross multiple classes, the order of things is not deteministic. Ambigious endpoints accross multiple classes need to be avoided.**
 
+#### GraphQL Endpoints
+
+You can use DHS also to fetch records from GraphQL Endpoints:
+
+```ruby
+# app/models/record.rb
+
+class Record < DHS::Record
+
+  configuration items_keys: [:data, :ethereum, :address, 0, :balances]
+
+  endpoint 'https://graphql.bitquery.io/',
+    graphql: {
+      query: %Q{
+        query ($network: EthereumNetwork!, $address: String!) {
+          ethereum(network: $network) {
+            address(address: {is: $address}) {
+              balances {
+                currency {
+                  address
+                  name
+                  symbol
+                  decimals
+                  tokenType
+                }
+                value
+              }
+            }
+          }
+        }
+      },
+      variables: [:network, :address]
+    }
+
+end
+```
+
+```ruby
+# app/controllers/some_controller.rb
+
+records = Record.where(network: 'ethereum', address: '0x317D875cA3B9f8d14f960486C0d1D1913be74e90')
+```
+
+```
+POST https://graphql.bitquery.io/
+
+BODY
+{
+  "query": "
+    query ($network: EthereumNetwork!, $address: String!) {
+      ethereum(network: $network) {
+        address(address: {is: $address}) {
+          balances {
+            currency {
+              address
+              name
+              symbol
+              decimals
+              tokenType
+            }
+            value
+          }
+        }
+      }
+    }
+  ",
+  "variables": {
+    "network": "ethereum",
+    "address": "0x317D875cA3B9f8d14f960486C0d1D1913be74e90"
+  }
+}
+
+RESPONSE
+"data": {
+  "ethereum": {
+    "address": [
+      {
+        balances: [
+          {
+            "currency": {
+              "address": "-",
+              "name": "Ether",
+              "decimals": 18,
+              "symbol": "ETH",
+              "tokenType": ""
+            },
+            "value": 0.11741978
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+```ruby
+# app/controllers/some_controller.rb
+
+records.first.currency.name # Ethereum
+```
+
 ### Provider
 
 Providers in DHS allow you to group shared endpoint options under a common provider.
@@ -2851,4 +2952,3 @@ expect(
 ## License
 
 [GNU General Public License Version 3.](https://www.gnu.org/licenses/gpl-3.0.en.html)
-

@@ -8,7 +8,7 @@ class DHS::Record
     extend ActiveSupport::Concern
 
     included do
-      class <<self
+      class << self
         alias_method :update, :create
         alias_method :update!, :create!
       end

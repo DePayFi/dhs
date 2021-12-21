@@ -24,14 +24,14 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activemodel'
   s.add_dependency 'activesupport', '>= 6'
-  s.add_dependency 'dhc'
+  s.add_dependency 'dhc', '>= 2'
   s.add_dependency 'local_uri'
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'json', '>=  1.8.2'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'pry-byebug'
-  s.add_development_dependency 'rails', '>= 6'
+  s.add_development_dependency 'rails', '>= 6', '< 7'
   s.add_development_dependency 'rollbar', '<= 2.24.0'
   s.add_development_dependency 'rspec-rails', '>= 3.7.0'
   s.add_development_dependency 'rubocop'
