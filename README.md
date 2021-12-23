@@ -164,7 +164,7 @@ You can use DHS also to fetch records from GraphQL Endpoints:
 
 class Record < DHS::Record
 
-  configuration items_keys: [:data, :ethereum, :address, 0, :balances]
+  configuration items_key: [:data, :ethereum, :address, 0, :balances]
 
   endpoint 'https://graphql.bitquery.io/',
     graphql: {
