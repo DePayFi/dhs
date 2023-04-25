@@ -3,11 +3,9 @@
 require 'rails_helper'
 
 describe DHS::Record do
-
   context 'pagination' do
-
-    def stub_api_request(items: [], offset: nil, next_offset:)
-      stub_request(:get, ["http://depay.fi/v2/transactions?limit=100", offset ? "offset=#{offset}" : nil].compact.join('&'))
+    def stub_api_request(next_offset:, items: [], offset: nil)
+      stub_request(:get, ['http://depay.fi/v2/transactions?limit=100', offset ? "offset=#{offset}" : nil].compact.join('&'))
         .to_return(body: { items: items, next_offset: next_offset }.to_json)
     end
 

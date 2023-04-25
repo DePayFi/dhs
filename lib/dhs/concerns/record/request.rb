@@ -204,7 +204,7 @@ class DHS::Record
       end
 
       def load_and_merge_not_paginated_collection!(data, options)
-        return if data.length.zero?
+        return if data.empty?
         options = options.is_a?(Hash) ? options : {}
         limit = options.dig(:params, limit_key(:parameter)) || pagination_class::DEFAULT_LIMIT
         offset = options.dig(:params, pagination_key(:parameter)) || pagination_class::DEFAULT_OFFSET
@@ -230,7 +230,7 @@ class DHS::Record
       end
 
       def load_and_merge_paginated_collection!(data, options)
-        set_nested_data(data._raw, limit_key(:body), data.length) if data._raw.dig(*limit_key(:body)).blank? && !data.length.zero?
+        set_nested_data(data._raw, limit_key(:body), data.length) if data._raw.dig(*limit_key(:body)).blank? && !data.empty?
         pagination = data._record.pagination(data)
         return data unless pagination.pages_left?
         record = data._record
@@ -256,7 +256,7 @@ class DHS::Record
           page_data = if next_value.is_a?(String) && next_value.match(/^http/)
              record.request(options.except(:all).merge(url: next_value))
           else
-            record.request(options.except(:all).merge(params: (options.dig(:params) || {}).merge(next_value) ))
+            record.request(options.except(:all).merge(params: (options.dig(:params) || {}).merge(next_value)))
           end
           next_value = pagination.next(page_data._raw)
           merge_batch_data_with_parent!(page_data, data, pagination)

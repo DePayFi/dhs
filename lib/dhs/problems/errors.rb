@@ -54,7 +54,7 @@ module DHS::Problems
     end
 
     def messages_from_response(response = nil)
-      return {} if !response || !response.body.is_a?(String) || response.body.length.zero?
+      return {} if !response || !response.body.is_a?(String) || response.body.empty?
       json = JSON.parse(response.body)
       parse_messages(json)
     end

@@ -3,7 +3,7 @@
 class DHS::Pagination::NextOffset < DHS::Pagination::Base
 
   DEFAULT_OFFSET = 0
-  
+
   def total
     data._raw.dig(*_record.items_key).count || 0
   end
