@@ -39,6 +39,7 @@ module DHS
     autoload :Page, 'dhs/pagination/page'
     autoload :TotalPages, 'dhs/pagination/total_pages'
     autoload :OffsetPage, 'dhs/pagination/offset_page'
+    autoload :NextOffset, 'dhs/pagination/next_offset'
     autoload :Start, 'dhs/pagination/start'
     autoload :Link, 'dhs/pagination/link'
   end

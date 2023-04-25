@@ -348,7 +348,7 @@ describe DHS::Record do
       expect(lambda do
         all = Record.all.fetch
       end).to output(
-        %r{\[WARNING\] You are loading all pages from a resource paginated with links only. As this is performed sequentially, it can result in very poor performance! \(https://github.com/DePayFi/dhs#pagination-strategy-link\).}
+        %r{\[WARNING\] You are loading all pages from a resource paginated with sequential pagination.}
       ).to_stderr
 
       expect(all).to be_kind_of Record

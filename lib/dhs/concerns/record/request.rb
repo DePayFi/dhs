@@ -237,7 +237,7 @@ class DHS::Record
         if pagination.parallel?
           load_and_merge_parallel_requests!(record, data, pagination, options)
         else
-          load_and_merge_sequential_requests!(record, data, options, data._raw.dig(:next, :href), pagination)
+          load_and_merge_sequential_requests!(record, data, options, pagination)
         end
       end
 
@@ -249,13 +249,16 @@ class DHS::Record
         end
       end
 
-      def load_and_merge_sequential_requests!(record, data, options, next_link, pagination)
-        warn '[WARNING] You are loading all pages from a resource paginated with links only. As this is performed sequentially, it can result in very poor performance! (https://github.com/DePayFi/dhs#pagination-strategy-link).'
-        while next_link.present?
-          page_data = record.request(
-            options.except(:all).merge(url: next_link)
-          )
-          next_link = page_data._raw.dig(:next, :href)
+      def load_and_merge_sequential_requests!(record, data, options, pagination)
+        warn '[WARNING] You are loading all pages from a resource paginated with sequential pagination.'
+        next_value = pagination.next(data._raw)
+        while next_value.present?
+          page_data = if next_value.is_a?(String) && next_value.match(/^http/)
+             record.request(options.except(:all).merge(url: next_value))
+          else
+            record.request(options.except(:all).merge(params: (options.dig(:params) || {}).merge(next_value) ))
+          end
+          next_value = pagination.next(page_data._raw)
           merge_batch_data_with_parent!(page_data, data, pagination)
         end
       end

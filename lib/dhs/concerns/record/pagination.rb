@@ -30,6 +30,8 @@ class DHS::Record
           DHS::Pagination::Start
         when :link
           DHS::Pagination::Link
+        when :next_offset
+          DHS::Pagination::NextOffset
         else
           DHS::Pagination::Offset
         end
@@ -43,7 +45,8 @@ class DHS::Record
       def paginated?(raw)
         raw.is_a?(Hash) && (
           raw.dig(*total_key).present? ||
-          raw.dig(*limit_key(:body)).present?
+          raw.dig(*limit_key(:body)).present? ||
+          raw.dig(*pagination_key(:body)).present?
         )
       end
     end

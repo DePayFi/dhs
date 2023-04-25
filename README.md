@@ -1386,6 +1386,51 @@ Sequentially:
   GET https://service.example.com/records?from_record_id=xcaoXBmuMyFFEcFDSgNgDQ&limit=100
 ```
 
+##### Pagination strategy: next_offset
+
+The `next_offset` strategy continuously follows in-response offset information to following pages until the last page is reached (indicated by next offset being either empty or 0).
+
+*WARNING*
+
+Loading all pages from a resource paginated with next_offset only can result in very poor performance, as pages can only be loaded sequentially!
+
+```ruby
+# app/models/record.rb
+
+class Search < DHS::Record
+  configuration pagination_strategy: 'next_offset'
+
+  endpoint '{+service}/assets'
+end
+```
+
+```ruby
+# app/controllers/some_controller.rb
+
+Record.all
+
+```
+```
+GET https://service.example.com/assets?limit=100
+{
+  items: [{...}, ...],
+  limit: 10,
+  next_offset: 29
+}
+GET https://service.example.com/assets?offset=29
+{
+  items: [{...}, ...],
+  limit: 10,
+  next_offset: 39
+}
+GET https://service.example.com/assets?offset=39
+{
+  items: [{...}, ...],
+  limit: 10,
+  next_offset: 0
+}
+```
+
 #### Pagination keys
 
 ##### limit_key

@@ -88,11 +88,13 @@ describe 'main graphql support' do
   end
 
   before do
+    DHC.config.placeholder('bitquery', 'https://graphql.bitquery.io/')
+
     class Record < DHS::Record
 
       configuration items_key: [:data, :ethereum, :address, 0, :balances]
 
-      endpoint 'https://graphql.bitquery.io/',
+      endpoint '{+bitquery}',
         graphql: {
           query: %{
             query ($network: EthereumNetwork!, $address: String!) {

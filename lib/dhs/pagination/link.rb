@@ -7,6 +7,10 @@ class DHS::Pagination::Link < DHS::Pagination::Base
 
   alias count total
 
+  def next(current)
+    current.dig(:next, :href)
+  end
+
   def pages_left
     pages_left? ? 1 : 0
   end
