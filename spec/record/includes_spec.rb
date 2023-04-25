@@ -214,12 +214,12 @@ describe DHS::Record do
 
       it 'overwrites existing pagination paramters if they are already contained in a string' do
         expect(DHC).to receive(:request)
-          .with(url: 'http://datastore/customers/1').and_call_original
+          .with({ url: 'http://datastore/customers/1' }).and_call_original
 
         expect(DHC).to receive(:request)
-          .with(url: 'http://datastore/customers/1/contracts',
-                all: true,
-                params: { limit: 100 }).and_call_original
+          .with({ url: 'http://datastore/customers/1/contracts',
+                  all: true,
+                  params: { limit: 100 } }).and_call_original
 
         expect(DHC).to receive(:request)
           .with([{ url: 'http://datastore/customers/1/contracts',
