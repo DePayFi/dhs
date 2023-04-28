@@ -387,6 +387,7 @@ class DHS::Record
       end
 
       def merge_batch_data_with_parent!(batch_data, parent_data, pagination = nil)
+        return if batch_data.raw_items.blank?
         parent_data.concat(input: parent_data._raw, items: batch_data.raw_items, record: self)
         return if pagination.present? && pagination.is_a?(DHS::Pagination::Link)
         [limit_key(:body), total_key, pagination_key(:body)].each do |pagination_attribute|
