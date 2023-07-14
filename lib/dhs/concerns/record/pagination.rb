@@ -32,6 +32,8 @@ class DHS::Record
           DHS::Pagination::Link
         when :next_offset
           DHS::Pagination::NextOffset
+        when :next_parameter
+          DHS::Pagination::NextParameter
         else
           DHS::Pagination::Offset
         end

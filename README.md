@@ -1431,6 +1431,50 @@ GET https://service.example.com/assets?offset=39
 }
 ```
 
+##### Pagination strategy: next_parameter
+
+The `next_parameter` strategy continuously follows in-response offset parameter information to following pages until the last page is reached (indicated by next parameter being empty or unset).
+
+*WARNING*
+
+Loading all pages from a resource paginated with next_parameter only can result in very poor performance, as pages can only be loaded sequentially!
+
+```ruby
+# app/models/record.rb
+
+class Search < DHS::Record
+  configuration pagination_strategy: 'next_parameter'
+
+  endpoint '{+service}/assets'
+end
+```
+
+```ruby
+# app/controllers/some_controller.rb
+
+Record.all
+
+```
+```
+GET https://service.example.com/assets?limit=100
+{
+  items: [{...}, ...],
+  limit: 10,
+  next: "LXBrPTIzMzE4NDE0"
+}
+GET https://service.example.com/assets?next=LXBrPTIzMzE4NDE0
+{
+  items: [{...}, ...],
+  limit: 10,
+  next: "ASDASdads9123"
+}
+GET https://service.example.com/assets?next=ASDASdads9123
+{
+  items: [{...}, ...],
+  limit: 10
+}
+```
+
 #### Pagination keys
 
 ##### limit_key
