@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activemodel'
   s.add_dependency 'activesupport', '>= 6'
+  s.add_dependency 'nio4r', '>= 2.7.1'
   s.add_dependency 'dhc', '>= 2'
   s.add_dependency 'local_uri'
 
