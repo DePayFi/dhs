@@ -9,7 +9,7 @@ class DHS::Pagination::NextParameter < DHS::Pagination::Base
   end
   alias count total
 
-  def self.next_offset(offset, limit)
+  def self.next_offset(_offset, _limit)
     nil
   end
 
@@ -24,7 +24,7 @@ class DHS::Pagination::NextParameter < DHS::Pagination::Base
 
   def next(current)
     next_value = current.dig(*_record.pagination_key(:body))
-    return if next_value.blank? || next_value.blank?
+    return if next_value.blank?
     {
       _record.pagination_key(:parameter) => current.dig(*_record.pagination_key(:body))
     }

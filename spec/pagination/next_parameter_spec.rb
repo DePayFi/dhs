@@ -3,10 +3,9 @@
 require 'rails_helper'
 
 describe DHS::Record do
-  context 'next parameter pagination' do
-    
+  context 'next parameter pagination' do  
     def stub_api_request(this_parameter:, next_parameter:, items: [])
-      stub_request(:get, ["http://depay.fi/v2/transactions?limit=100", this_parameter ? "next=#{this_parameter}" : nil].compact.join('&'))
+      stub_request(:get, ['http://depay.fi/v2/transactions?limit=100', this_parameter ? "next=#{this_parameter}" : nil].compact.join('&'))
         .to_return(body: { items: items, next: next_parameter }.to_json)
     end
 
@@ -31,9 +30,8 @@ describe DHS::Record do
   end
 
   context 'next parameter pagination with items configuration and nil response' do
-
     def stub_api_request(this_parameter:, next_parameter:, items: [])
-      stub_request(:get, ["http://depay.fi/v2/transactions?limit=100", this_parameter ? "next=#{this_parameter}" : nil].compact.join('&'))
+      stub_request(:get, ['http://depay.fi/v2/transactions?limit=100', this_parameter ? "next=#{this_parameter}" : nil].compact.join('&'))
         .to_return(body: { assets: items, next: next_parameter }.to_json)
     end
 
